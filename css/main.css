@@ -1,0 +1,18 @@
+#container {
+	width: 600px;
+	height: 600px;
+}
+
+.square {
+	height: 200px;
+	width: 200px;
+	float: left;
+
+}
+
+.square:nth-child(even) {
+	background: #ccc;
+}
+.square::before {
+	content: 'x';
+}
