@@ -46,13 +46,20 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(158);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	ReactDOM.render(React.createElement(
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	_reactDom2['default'].render(_react2['default'].createElement(
 		'h1',
 		null,
-		'of something'
+		'of something or nothing'
 	), document.getElementById('#container'));
 
 /***/ },
