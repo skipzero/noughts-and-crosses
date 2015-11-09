@@ -56,11 +56,24 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	_reactDom2['default'].render(_react2['default'].createElement(
-		'h1',
-		null,
-		'of something or nothing'
-	), document.getElementById('#container'));
+	var SquareButton = _react2['default'].createClass({
+		displayName: 'SquareButton',
+
+		getInitialState: function getInitialState() {
+			return { picked: false };
+		},
+
+		handleClick: function handleClick(event) {
+			console.log('bang!');
+		},
+
+		render: function render() {
+			return _react2['default'].createElement('div', { className: 'square', onClick: this.handleClick });
+		}
+
+	});
+
+	_reactDom2['default'].render(_react2['default'].createElement(SquareButton, { className: 'square' }), document.getElementById('container'));
 
 /***/ },
 /* 1 */
