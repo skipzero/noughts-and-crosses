@@ -56,24 +56,39 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _squareJsx = __webpack_require__(159);
+
+	var _squareJsx2 = _interopRequireDefault(_squareJsx);
+
 	var SquareButton = _react2['default'].createClass({
 		displayName: 'SquareButton',
 
-		getInitialState: function getInitialState() {
-			return { picked: false };
-		},
-
 		handleClick: function handleClick(event) {
-			console.log('bang!');
+			console.log('fires....');
 		},
 
 		render: function render() {
-			return _react2['default'].createElement('div', { className: 'square', onClick: this.handleClick });
-		}
 
+			return _react2['default'].createElement(
+				'div',
+				null,
+				this.squareNine()
+			);
+		},
+
+		squareNine: function squareNine() {
+			var squares = [];
+
+			for (var i = 0; i < 9; i++) {
+				squares.push(_react2['default'].createElement(_squareJsx2['default'], { key: i, value: 'O' }));
+			}
+
+			console.log('square', squares);
+			return squares;
+		}
 	});
 
-	_reactDom2['default'].render(_react2['default'].createElement(SquareButton, { className: 'square' }), document.getElementById('container'));
+	_reactDom2['default'].render(_react2['default'].createElement(SquareButton, null), document.getElementById('container'));
 
 /***/ },
 /* 1 */
@@ -19658,6 +19673,37 @@
 
 	module.exports = __webpack_require__(3);
 
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Square = _react2['default'].createClass({
+		displayName: 'Square',
+
+		render: function render() {
+			return _react2['default'].createElement(
+				'div',
+				{ className: 'square', onClick: this.handleClick },
+				this.props.value
+			);
+		}
+	});
+
+	exports['default'] = Square;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

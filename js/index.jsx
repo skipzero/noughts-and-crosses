@@ -2,25 +2,36 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Square from './square.jsx';
 
-var SquareButton = React.createClass({
-	getInitialState: function() {
-		return {picked: false};
-	},
-	
+let SquareButton = React.createClass({
 	handleClick: function(event) {
-		console.log('bang!')
+console.log('fires....')
 	},
 	
 	render: function() {
-		return (
-			<div className="square" onClick={this.handleClick}></div>
-		);
-	}
 
+		return (
+			<div>
+				{this.squareNine()}
+			</div>
+		);
+	},
+
+	squareNine: function() {
+		let squares = [];
+
+		for(var i = 0; i < 9; i++) {
+			squares.push(<Square key={i} value="O" />)
+		}
+
+		console.log('square', squares)
+		return squares;
+	}
 });
 
 
+
 ReactDOM.render(
-	<SquareButton className="square" />, document.getElementById('container')
+	<SquareButton />, document.getElementById('container')
 );
