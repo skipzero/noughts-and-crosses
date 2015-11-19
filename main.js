@@ -80,10 +80,10 @@
 			var squares = [];
 
 			for (var i = 0; i < 9; i++) {
-				squares.push(_react2['default'].createElement(_squareJsx2['default'], { key: i, value: 'O' }));
+				squares.push(_react2['default'].createElement(_squareJsx2['default'], { key: i, value: 'O', onClick: this.handleClick }));
 			}
 
-			console.log('square', squares);
+			console.log('square', squares, 'THIS', this.props);
 			return squares;
 		}
 	});
@@ -19696,7 +19696,7 @@
 		render: function render() {
 			return _react2['default'].createElement(
 				'div',
-				{ className: 'square', onClick: this.handleClick },
+				{ className: 'square' },
 				this.props.value
 			);
 		}

@@ -22,10 +22,10 @@ console.log('fires....')
 		let squares = [];
 
 		for(var i = 0; i < 9; i++) {
-			squares.push(<Square key={i} value="O" />)
+			squares.push(<Square key={i} value="O" onClick={this.handleClick}/>)
 		}
 
-		console.log('square', squares)
+		console.log('square', squares, 'THIS', this.props)
 		return squares;
 	}
 });
