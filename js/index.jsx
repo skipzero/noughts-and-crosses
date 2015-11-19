@@ -30,8 +30,6 @@ console.log('fires....')
 	}
 });
 
-
-
 ReactDOM.render(
 	<SquareButton />, document.getElementById('container')
 );
