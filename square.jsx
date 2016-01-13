@@ -63,8 +63,12 @@
 	var SquareButton = _react2['default'].createClass({
 		displayName: 'SquareButton',
 
+		handleClick: function handleClick(event) {
+			console.log('fires....', event);
+		},
+
 		render: function render() {
-			console.log('render', this);
+
 			return _react2['default'].createElement(
 				'div',
 				null,
@@ -76,8 +80,10 @@
 			var squares = [];
 
 			for (var i = 0; i < 9; i++) {
-				squares.push(_react2['default'].createElement(_squareJsx2['default'], { key: i, value: 'O' }));
+				squares.push(_react2['default'].createElement(_squareJsx2['default'], { key: i, value: 'O', onClick: this.handleClick }));
 			}
+
+			console.log('square', squares, 'THIS', this.props);
 			return squares;
 		}
 	});
@@ -19687,19 +19693,10 @@
 	var Square = _react2['default'].createClass({
 		displayName: 'Square',
 
-		setInitialState: function setInitialState() {
-			return { value: 'O' };
-		},
-
-		handleClick: function handleClick(event) {
-			console.log('FIRED!!', event);
-			return this.setState({ value: 'X' });
-		},
-
 		render: function render() {
 			return _react2['default'].createElement(
 				'div',
-				{ className: 'square', onClick: this.handleClick.bind(this, 'aNode') },
+				{ className: 'square d' },
 				this.props.value
 			);
 		}

@@ -5,12 +5,9 @@ import ReactDOM from 'react-dom';
 import Square from './square.jsx';
 
 let SquareButton = React.createClass({
-	handleClick: function(event) {
-console.log('fires....')
-	},
 	
 	render: function() {
-
+		console.log('render', this)
 		return (
 			<div>
 				{this.squareNine()}
@@ -22,10 +19,8 @@ console.log('fires....')
 		let squares = [];
 
 		for(var i = 0; i < 9; i++) {
-			squares.push(<Square key={i} value="O" onClick={this.handleClick}/>)
+			squares.push(<Square key={i} value="O"/>)
 		}
-
-		console.log('square', squares, 'THIS', this.props)
 		return squares;
 	}
 });
