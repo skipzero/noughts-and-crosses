@@ -60,11 +60,13 @@
 
 	var _squareJsx2 = _interopRequireDefault(_squareJsx);
 
-	var SquareButton = _react2['default'].createClass({
-		displayName: 'SquareButton',
+	var SquaresBoard = _react2['default'].createClass({
+
+		displayName: 'SquareBoard',
 
 		render: function render() {
 			console.log('render', this);
+
 			return _react2['default'].createElement(
 				'div',
 				null,
@@ -73,16 +75,17 @@
 		},
 
 		squareNine: function squareNine() {
-			var squares = [];
+			var squares = [],
+			    sqVal = ' + ';
 
 			for (var i = 0; i < 9; i++) {
-				squares.push(_react2['default'].createElement(_squareJsx2['default'], { key: i, value: 'O' }));
+				squares.push(_react2['default'].createElement(_squareJsx2['default'], { key: i, value: sqVal }));
 			}
 			return squares;
 		}
 	});
 
-	_reactDom2['default'].render(_react2['default'].createElement(SquareButton, null), document.getElementById('container'));
+	_reactDom2['default'].render(_react2['default'].createElement(SquaresBoard, null), document.getElementById('container'));
 
 /***/ },
 /* 1 */
@@ -19685,21 +19688,30 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	var Square = _react2['default'].createClass({
+
 		displayName: 'Square',
 
-		setInitialState: function setInitialState() {
-			return { value: 'O' };
-		},
-
 		handleClick: function handleClick(event) {
-			console.log('FIRED!!', event);
-			return this.setState({ value: 'X' });
+
+			var sqVal = this.props.value;
+			console.log('fire!');
+			console.log('Val', sqVal);
+			if (this.props.value === 'X' || this.props.value === 'O') {
+
+				console.log('if', this);
+
+				return;
+			}
+			console.log('not if', this);
+			sqVal = ' X ';
+			render(sqVal);
 		},
 
 		render: function render() {
+
 			return _react2['default'].createElement(
 				'div',
-				{ className: 'square', onClick: this.handleClick.bind(this, 'aNode') },
+				{ className: 'square', onClick: this.handleClick },
 				this.props.value
 			);
 		}
