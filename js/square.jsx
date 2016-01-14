@@ -19,7 +19,8 @@ let Square = React.createClass({
 		}
 		console.log('not if', this)
 		sqVal = ' X ';
-		render(sqVal)
+console.log(this.props.value)
+		this.props.refresh;
 
 	},
 

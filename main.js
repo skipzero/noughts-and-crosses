@@ -82,6 +82,10 @@
 				squares.push(_react2['default'].createElement(_squareJsx2['default'], { key: i, value: sqVal }));
 			}
 			return squares;
+		},
+
+		refresh: function refresh() {
+			console.log('Refresh', this);
 		}
 	});
 
@@ -19704,7 +19708,8 @@
 			}
 			console.log('not if', this);
 			sqVal = ' X ';
-			render(sqVal);
+			console.log(this.props.value);
+			this.props.refresh;
 		},
 
 		render: function render() {

@@ -16,9 +16,9 @@ let SquaresBoard = React.createClass({
 				{this.squareNine()}
 			</div>
 		);
-	},
+	}
 
-	squareNine: function() {
+	, squareNine: function() {
 		let squares = []
 			, sqVal = ' + ';
 
@@ -26,6 +26,10 @@ let SquaresBoard = React.createClass({
 			squares.push(<Square key={i} value={sqVal}/>)
 		}
 		return squares;
+	}
+
+	, refresh: function() {
+		console.log('Refresh', this)
 	}
 });
 
