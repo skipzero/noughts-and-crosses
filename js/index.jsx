@@ -4,13 +4,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Square from './square.jsx';
 
-let SquaresBoard = React.createClass({
+let Game = React.createClass({
 
-	displayName: 'SquareBoard',
+	displayName: 'SquareBoard'
+
+	, getInitialState: function() {
+		console.log('setState...', this);
+		// debugger;
+		return { 
+			value 	: '++' 
+			, turn 	: 'O'
+		}
+	}
 	
-	render: function() {
-		console.log('render', this)
-
+	, render: function() {
+		let count = '0';
+		console.log('count', count += 1, 'render', this)
 		return (
 			<div>
 				{this.squareNine()}
@@ -18,22 +27,23 @@ let SquaresBoard = React.createClass({
 		);
 	}
 
-	, squareNine: function() {
-		let squares = []
-			, sqVal = ' + ';
-
-		for(var i = 0; i < 9; i++) {
-			squares.push(<Square key={i} value={sqVal}/>)
-		}
-		return squares;
+	, clickHandler: function(move) {
+		this.setState({
+			turn 	: 'X'
+		})
+console.log('Xs', this.state)
 	}
 
-	, refresh: function() {
-		console.log('Refresh', this)
+	, squareNine: function() {
+
+		let squares = [];
+		for(var i = 0; i < 9; i++) {
+			squares.push(<Square key={i} value={this.state.turn} clicker={ this.clickHandler }/>)
+		}
+		return squares;
 	}
 });
 
 ReactDOM.render(
-
-	<SquaresBoard />, document.getElementById('container')
+	<Game />, document.getElementById('container')
 );

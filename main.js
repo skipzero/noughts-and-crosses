@@ -60,13 +60,22 @@
 
 	var _squareJsx2 = _interopRequireDefault(_squareJsx);
 
-	var SquaresBoard = _react2['default'].createClass({
+	var Game = _react2['default'].createClass({
 
 		displayName: 'SquareBoard',
 
-		render: function render() {
-			console.log('render', this);
+		getInitialState: function getInitialState() {
+			console.log('setState...', this);
+			// debugger;
+			return {
+				value: '++',
+				turn: 'O'
+			};
+		},
 
+		render: function render() {
+			var count = '0';
+			console.log('count', count += 1, 'render', this);
 			return _react2['default'].createElement(
 				'div',
 				null,
@@ -74,22 +83,24 @@
 			);
 		},
 
-		squareNine: function squareNine() {
-			var squares = [],
-			    sqVal = ' + ';
-
-			for (var i = 0; i < 9; i++) {
-				squares.push(_react2['default'].createElement(_squareJsx2['default'], { key: i, value: sqVal }));
-			}
-			return squares;
+		clickHandler: function clickHandler(move) {
+			this.setState({
+				turn: 'X'
+			});
+			console.log('Xs', this.state);
 		},
 
-		refresh: function refresh() {
-			console.log('Refresh', this);
+		squareNine: function squareNine() {
+
+			var squares = [];
+			for (var i = 0; i < 9; i++) {
+				squares.push(_react2['default'].createElement(_squareJsx2['default'], { key: i, value: this.state.turn, clicker: this.clickHandler }));
+			}
+			return squares;
 		}
 	});
 
-	_reactDom2['default'].render(_react2['default'].createElement(SquaresBoard, null), document.getElementById('container'));
+	_reactDom2['default'].render(_react2['default'].createElement(Game, null), document.getElementById('container'));
 
 /***/ },
 /* 1 */
@@ -19695,28 +19706,11 @@
 
 		displayName: 'Square',
 
-		handleClick: function handleClick(event) {
-
-			var sqVal = this.props.value;
-			console.log('fire!');
-			console.log('Val', sqVal);
-			if (this.props.value === 'X' || this.props.value === 'O') {
-
-				console.log('if', this);
-
-				return;
-			}
-			console.log('not if', this);
-			sqVal = ' X ';
-			console.log(this.props.value);
-			this.props.refresh;
-		},
-
 		render: function render() {
-
+			console.log('Render', this.props);
 			return _react2['default'].createElement(
 				'div',
-				{ className: 'square', onClick: this.handleClick },
+				{ className: this.props.value === '' ? 'tile' : 'tile status-' + this.props.value + ' square', onClick: this.props.clicker },
 				this.props.value
 			);
 		}
