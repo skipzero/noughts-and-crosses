@@ -6,9 +6,13 @@ let Square = React.createClass({
 
 	displayName: 'Square'
 
+	, playerTurn: function() {
+		this.props.clicker(this.props.index, this.props.turn)
+	}
+
 	, render: function() {
-		console.log('Render', this.props);
-		return <div className={this.props.value === '' ? 'tile' : 'tile status-' + this.props.value + ' square'} onClick={this.props.clicker}>{this.props.value}</div>
+		console.log('Render2', this);
+		return <div className={this.props.status + ' square'} onClick={this.playerTurn}>{this.props.status}</div>
 	}
 });
 

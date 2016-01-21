@@ -65,38 +65,48 @@
 		displayName: 'SquareBoard',
 
 		getInitialState: function getInitialState() {
-			console.log('setState...', this);
-			// debugger;
+
 			return {
-				value: '++',
+				squares: ['', '', '', '', '', '', '', '', ''],
 				turn: 'O'
 			};
 		},
 
 		render: function render() {
-			var count = '0';
-			console.log('count', count += 1, 'render', this);
+			var gameboard = this.gameBoard();
+
+			console.log('render', this);
 			return _react2['default'].createElement(
 				'div',
 				null,
-				this.squareNine()
+				gameboard
 			);
 		},
 
-		clickHandler: function clickHandler(move) {
+		clickHandler: function clickHandler(index, move) {
+			console.log('Moves', move, this.state.squares[index]);
+
+			var squares = this.state.squares;
+			squares[index] = move;
 			this.setState({
-				turn: 'X'
+				squares: squares,
+				turn: move === 'O' ? 'X' : 'O'
 			});
 			console.log('Xs', this.state);
 		},
 
-		squareNine: function squareNine() {
+		gameBoard: function gameBoard() {
 
-			var squares = [];
-			for (var i = 0; i < 9; i++) {
-				squares.push(_react2['default'].createElement(_squareJsx2['default'], { key: i, value: this.state.turn, clicker: this.clickHandler }));
-			}
-			return squares;
+			return _react2['default'].createElement(
+				'div',
+				{ id: 'gameBoard' },
+				' ',
+				this.state.squares.map(function (square, i) {
+					console.log('Ind', i);
+					return _react2['default'].createElement(_squareJsx2['default'], { key: i, index: i, status: square, turn: this.state.turn, clicker: this.clickHandler });
+				}, this),
+				' '
+			);
 		}
 	});
 
@@ -19706,12 +19716,16 @@
 
 		displayName: 'Square',
 
+		playerTurn: function playerTurn() {
+			this.props.clicker(this.props.index, this.props.turn);
+		},
+
 		render: function render() {
-			console.log('Render', this.props);
+			console.log('Render2', this);
 			return _react2['default'].createElement(
 				'div',
-				{ className: this.props.value === '' ? 'tile' : 'tile status-' + this.props.value + ' square', onClick: this.props.clicker },
-				this.props.value
+				{ className: this.props.status + ' square', onClick: this.playerTurn },
+				this.props.status
 			);
 		}
 	});

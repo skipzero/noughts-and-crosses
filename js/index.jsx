@@ -9,38 +9,45 @@ let Game = React.createClass({
 	displayName: 'SquareBoard'
 
 	, getInitialState: function() {
-		console.log('setState...', this);
-		// debugger;
+
 		return { 
-			value 	: '++' 
+			squares : ['','','','','','','','','']
 			, turn 	: 'O'
 		}
 	}
 	
 	, render: function() {
-		let count = '0';
-		console.log('count', count += 1, 'render', this)
+		let gameboard = this.gameBoard();
+
+		console.log('render', this);
 		return (
 			<div>
-				{this.squareNine()}
+				{gameboard}
 			</div>
 		);
 	}
 
-	, clickHandler: function(move) {
+	, clickHandler: function(index, move) {
+console.log('Moves', move, this.state.squares[index])
+
+		let squares = this.state.squares;
+		squares[index] = move;
 		this.setState({
-			turn 	: 'X'
-		})
+			squares : squares
+			, turn 	: move === 'O' ? 'X' : 'O'
+		});
 console.log('Xs', this.state)
 	}
 
-	, squareNine: function() {
+	, gameBoard: function() {
 
-		let squares = [];
-		for(var i = 0; i < 9; i++) {
-			squares.push(<Square key={i} value={this.state.turn} clicker={ this.clickHandler }/>)
-		}
-		return squares;
+		return <div id='gameBoard'> {
+			this.state.squares.map(function(square, i) {
+console.log('Ind', i)
+				return (
+					<Square key={i} index={i} status={square} turn={this.state.turn} clicker={ this.clickHandler }/>
+				);
+		}, this)} </div>
 	}
 });
 
