@@ -68,7 +68,7 @@ let Game = React.createClass({
 		];
 		for (let i = 0; i < winningNumbs.length; i++) {
 
-			if(winningNumbs[i][0] === move && winningNumbs[i][1] === move && winningNumbs[i][3] === move) {
+			if(winningNumbs[i][0] === move && winningNumbs[i][1] === move && winningNumbs[i][2] === move) {
 				console.log('Bang!')
 			}
 		}
