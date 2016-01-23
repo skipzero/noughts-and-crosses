@@ -55,7 +55,7 @@ let Game = React.createClass({
 
 	, checkWin: function (index, move) {
 		let squares = this.state.squares;
-		
+
 		let winningNumbs = [
 			[0,1,2]
 			, [0,3,6]
@@ -68,7 +68,7 @@ let Game = React.createClass({
 		];
 		for (let i = 0; i < winningNumbs.length; i++) {
 
-			if(winningNumbs[i][0] === move && winningNumbs[i][0] === move && winningNumbs[i][0] === move) {
+			if(winningNumbs[i][0] === move && winningNumbs[i][1] === move && winningNumbs[i][3] === move) {
 				console.log('Bang!')
 			}
 		}
