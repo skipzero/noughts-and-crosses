@@ -7,7 +7,7 @@ let Square = React.createClass({
 	displayName: 'Square'
 
 	, playerTurn: function() {
-		this.props.clicker(this.props.index, this.props.move)
+		this.props.clicker(this.props.index, this.props.turn)
 	}
 
 	, render: function() {
