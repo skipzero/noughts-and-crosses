@@ -55,7 +55,7 @@ let Game = React.createClass({
 
 	, checkWin: function (index, move) {
 		let squares = this.state.squares;
-console.log('Move', move)
+		
 		let winningNumbs = [
 			[0,1,2]
 			, [0,3,6]
