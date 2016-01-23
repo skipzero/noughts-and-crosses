@@ -68,7 +68,7 @@
 
 			return {
 				squares: ['', '', '', '', '', '', '', '', ''],
-				turn: 'O'
+				move: 'O'
 			};
 		},
 
@@ -84,15 +84,19 @@
 		},
 
 		clickHandler: function clickHandler(index, move) {
-			console.log('Moves', move, this.state.squares[index]);
 
 			var squares = this.state.squares;
+
+			if (squares[index] === 'O' || squares[index] === 'X') {
+				return;
+			}
+
 			squares[index] = move;
+			this.checkWin(index, move);
 			this.setState({
 				squares: squares,
 				turn: move === 'O' ? 'X' : 'O'
 			});
-			console.log('Xs', this.state);
 		},
 
 		gameBoard: function gameBoard() {
@@ -102,11 +106,22 @@
 				{ id: 'gameBoard' },
 				' ',
 				this.state.squares.map(function (square, i) {
-					console.log('Ind', i);
-					return _react2['default'].createElement(_squareJsx2['default'], { key: i, index: i, status: square, turn: this.state.turn, clicker: this.clickHandler });
+					return _react2['default'].createElement(_squareJsx2['default'], { key: i, index: i, status: square, move: this.state.move, clicker: this.clickHandler });
 				}, this),
 				' '
 			);
+		},
+
+		checkWin: function checkWin(index, move) {
+			var squares = this.state.squares;
+			console.log('Move', move);
+			var winningNumbs = [[0, 1, 2], [0, 3, 6], [0, 4, 8], [1, 4, 6], [2, 5, 8], [2, 4, 6], [3, 4, 5], [6, 7, 8]];
+			for (var i = 0; i < winningNumbs.length; i++) {
+
+				if (winningNumbs[i][0] === move && winningNumbs[i][0] === move && winningNumbs[i][0] === move) {
+					console.log('Bang!');
+				}
+			}
 		}
 	});
 
@@ -19717,14 +19732,13 @@
 		displayName: 'Square',
 
 		playerTurn: function playerTurn() {
-			this.props.clicker(this.props.index, this.props.turn);
+			this.props.clicker(this.props.index, this.props.move);
 		},
 
 		render: function render() {
-			console.log('Render2', this);
 			return _react2['default'].createElement(
 				'div',
-				{ className: this.props.status + ' square', onClick: this.playerTurn },
+				{ className: 'square', onClick: this.playerTurn },
 				this.props.status
 			);
 		}

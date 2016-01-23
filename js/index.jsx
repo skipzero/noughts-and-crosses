@@ -12,7 +12,7 @@ let Game = React.createClass({
 
 		return { 
 			squares : ['','','','','','','','','']
-			, turn 	: 'O'
+			, move 	: 'O'
 		}
 	}
 	
@@ -28,26 +28,50 @@ let Game = React.createClass({
 	}
 
 	, clickHandler: function(index, move) {
-console.log('Moves', move, this.state.squares[index])
 
 		let squares = this.state.squares;
+		
+		if(squares[index] === 'O' || squares[index] === 'X') {
+			return;
+		}
+		
 		squares[index] = move;
+		this.checkWin(index, move)
 		this.setState({
 			squares : squares
 			, turn 	: move === 'O' ? 'X' : 'O'
 		});
-console.log('Xs', this.state)
 	}
 
 	, gameBoard: function() {
 
 		return <div id='gameBoard'> {
 			this.state.squares.map(function(square, i) {
-console.log('Ind', i)
 				return (
-					<Square key={i} index={i} status={square} turn={this.state.turn} clicker={ this.clickHandler }/>
+					<Square key={i} index={i} status={square} move={this.state.move} clicker={ this.clickHandler }/>
 				);
 		}, this)} </div>
+	}
+
+	, checkWin: function (index, move) {
+		let squares = this.state.squares;
+console.log('Move', move)
+		let winningNumbs = [
+			[0,1,2]
+			, [0,3,6]
+			, [0,4,8]
+			, [1,4,6]
+			, [2,5,8]
+			, [2,4,6]
+			, [3,4,5]
+			, [6,7,8]
+		];
+		for (let i = 0; i < winningNumbs.length; i++) {
+
+			if(winningNumbs[i][0] === move && winningNumbs[i][0] === move && winningNumbs[i][0] === move) {
+				console.log('Bang!')
+			}
+		}
 	}
 });
 
