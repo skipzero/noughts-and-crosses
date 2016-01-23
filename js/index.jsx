@@ -19,7 +19,6 @@ let Game = React.createClass({
 	, render: function() {
 		let gameboard = this.gameBoard();
 
-		console.log('render', this);
 		return (
 			<div>
 				{gameboard}
@@ -52,7 +51,7 @@ let Game = React.createClass({
 
 	, checkWin: function (index, move) {
 		let squares = this.state.squares;
-console.log('Move', move)
+
 		let winArr = [
 			[0,1,2]
 			, [0,3,6]
@@ -64,12 +63,15 @@ console.log('Move', move)
 			, [6,7,8]
 		];
 		for (let i = 0; i < winArr.length; i++) {
-			let currArr = winArr[i];
-debugger;
-			if(currArr[0] === currArr[1] && currArr[0] === currArr[2] && currArr[0] != '') {
+			let currArr1 	= winArr[i][0]
+				, currArr2 	= winArr[i][1]
+				, currArr3 	= winArr[i][2];
+
+			if(squares[currArr1] === squares[currArr2] && squares[currArr1] === squares[currArr3] && squares[currArr1] != '') {
+
 				console.log('Winner!! the ' + move +'\'s win!')
-			}
-		}
+			};
+		};
 	}
 });
 

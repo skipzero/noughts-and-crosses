@@ -75,7 +75,6 @@
 		render: function render() {
 			var gameboard = this.gameBoard();
 
-			console.log('render', this);
 			return _react2['default'].createElement(
 				'div',
 				null,
@@ -111,15 +110,18 @@
 
 		checkWin: function checkWin(index, move) {
 			var squares = this.state.squares;
-			console.log('Move', move);
+
 			var winArr = [[0, 1, 2], [0, 3, 6], [0, 4, 8], [1, 4, 6], [2, 5, 8], [2, 4, 6], [3, 4, 5], [6, 7, 8]];
 			for (var i = 0; i < winArr.length; i++) {
-				var currArr = winArr[i];
-				debugger;
-				if (currArr[0] === currArr[1] && currArr[0] === currArr[2] && currArr[0] != '') {
+				var currArr1 = winArr[i][0],
+				    currArr2 = winArr[i][1],
+				    currArr3 = winArr[i][2];
+
+				if (squares[currArr1] === squares[currArr2] && squares[currArr1] === squares[currArr3] && squares[currArr1] != '') {
+
 					console.log('Winner!! the ' + move + '\'s win!');
-				}
-			}
+				};
+			};
 		}
 	});
 
