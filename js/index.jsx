@@ -66,7 +66,7 @@ console.log('Move', move)
 		for (let i = 0; i < winArr.length; i++) {
 			let currArr = winArr[i];
 debugger;
-			if(currArr[0] === move && currArr[1] === move && currArr[2] === move) {
+			if(currArr[0] === currArr[1] && currArr[0] === currArr[2] && currArr[0] != '') {
 				console.log('Winner!! the ' + move +'\'s win!')
 			}
 		}
