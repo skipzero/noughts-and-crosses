@@ -13,7 +13,7 @@ let Game = React.createClass({
 		return { 
 			squares : ['','','','','','','','','']
 			, turn 	: 'O'
-			, round : 0
+			, round : 1
 		}
 	}
 	
@@ -66,17 +66,40 @@ console.log('Round', round)
 			, [2,4,6]
 			, [3,4,5]
 			, [6,7,8]
-		];
+		]
+			, turn = this.state.round;
+			
 		for (let i = 0; i < winArr.length; i++) {
 			let currArr1 	= winArr[i][0]
 				, currArr2 	= winArr[i][1]
 				, currArr3 	= winArr[i][2];
 
-			if(squares[currArr1] === squares[currArr2] && squares[currArr1] === squares[currArr3] && squares[currArr1] != '') {
+			if (this.state.round === 9) {
+				console.log('Tie game... blah.');
+				return;
+			};
+
+			if(squares[currArr1] === squares[currArr2] && squares[currArr1] === squares[currArr3] && squares[currArr1] != '') { //winning conditions...
 
 				console.log('Winner!! the ' + move +'\'s win!')
-			};
+			} else {
+				this.autoTurn();
+			}
 		};
+	}
+
+	, autoTurn: function() {
+		let compTurn = this.randNum();
+
+		console.log('Comp', compTurn)
+
+	}
+
+	, randNum: function() {
+		let min = 0
+		,	max 	= 8;
+
+		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 });
 
