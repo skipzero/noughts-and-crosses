@@ -68,7 +68,8 @@
 
 			return {
 				squares: ['', '', '', '', '', '', '', '', ''],
-				turn: 'O'
+				turn: 'O',
+				round: 0
 			};
 		},
 
@@ -83,15 +84,19 @@
 		},
 
 		clickHandler: function clickHandler(index, move) {
-			var squares = this.state.squares;
+			var squares = this.state.squares,
+			    round = this.state.round;
 			if (squares[index] === 'O' || squares[index] === 'X') {
 				return;
 			}
+
 			squares[index] = move;
 			this.checkWin(index, move);
+			console.log('Round', round);
 			this.setState({
 				squares: squares,
-				turn: move === 'O' ? 'X' : 'O'
+				turn: move === 'O' ? 'X' : 'O',
+				round: round + 1
 			});
 		},
 

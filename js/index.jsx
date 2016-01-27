@@ -13,6 +13,7 @@ let Game = React.createClass({
 		return { 
 			squares : ['','','','','','','','','']
 			, turn 	: 'O'
+			, round : 0
 		}
 	}
 	
@@ -27,15 +28,19 @@ let Game = React.createClass({
 	}
 
 	, clickHandler: function(index, move) {
-		let squares = this.state.squares;
+		let squares = this.state.squares
+			, round = this.state.round;
 		if(squares[index] === 'O' || squares[index] === 'X') {
 			return;
 		}
+
 		squares[index] = move;
 		this.checkWin(index, move)
+console.log('Round', round)
 		this.setState({
 			squares : squares
 			, turn 	: move === 'O' ? 'X' : 'O'
+			, round : round + 1
 		});
 	}
 
