@@ -124,31 +124,33 @@
 				    currArr2 = winArr[i][1],
 				    currArr3 = winArr[i][2];
 
-				if (this.state.round === 9) {
+				// if we've reached max # of moves, it's a tie
+				if (turn === 9) {
 					console.log('Tie game... blah.');
 					return;
 				};
 
+				// Check if any of our winning conditions are met...
 				if (squares[currArr1] === squares[currArr2] && squares[currArr1] === squares[currArr3] && squares[currArr1] != '') {
-					//winning conditions...
 
 					console.log('Winner!! the ' + move + '\'s win!');
 				} else {
-					this.autoTurn();
+					this.autoTurn(move);
 				}
 			};
 		},
 
-		autoTurn: function autoTurn() {
-			var compTurn = this.randNum();
+		autoTurn: function autoTurn(move) {
+			var compTurn = this.randNum(),
+			    squares = this.state.squares;
 
-			console.log('Comp', compTurn);
+			if (squares[compTurn] != '') {}
+			console.log('Comp', squares[compTurn], 'move', move);
 		},
 
 		randNum: function randNum() {
 			var min = 0,
 			    max = 8;
-
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
 	});
