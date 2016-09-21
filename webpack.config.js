@@ -26,10 +26,20 @@ const config = {
       },
 
       {
+        test: /\.js?/,
+        exclude: /node_modules/,
+        loaders: ['babel-loader', 'eslint-loader']
+      },
+
+      {
         test: /\/.sass?/,
         loaders: ['style-loader', 'css-loader', 'postcss-loader']
       }
     ]
+  },
+
+  eslint: {
+    configFile: './.eslintrc.js'
   },
 
   output: {

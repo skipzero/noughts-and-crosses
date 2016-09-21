@@ -1,18 +1,13 @@
-'use strict';
-
 import React from 'react';
 
-let Square = React.createClass({
-
-	displayName: 'Square'
-
-	, playerTurn: function() {
-		this.props.clicker(this.props.index, this.props.turn)
-	}
-
-	, render: function() {
-		return <div className='square' onClick={this.playerTurn}>{this.props.status}</div>
-	}
-});
-
-export default Square;
+export default class Square extends React.Component {
+  render () {
+    return (
+      <div className='square' onClick={this.props.handleClick}>{this.props.status}</div>
+    );
+  }
+}
+Square.propTypes = {
+  // handleClick: React.PropTypes.function,
+  status: React.PropTypes.string,
+};

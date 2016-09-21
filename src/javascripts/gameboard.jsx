@@ -1,46 +1,46 @@
-import React from 'react'
-import Square from './square.jsx'
+import React from 'react';
+import Square from './square.jsx';
 
 export default class Game extends React.Component {
   constructor (props) {
-    super(props)
-    this.state = this.cleanState()
+    super(props);
+    this.state = this.cleanState();
   }
 
   cleanState () {
     return {
       squares: Array(9).fill(''),
       turn: 'O',
-      round: 1
-    }
+      round: 1,
+    };
   }
 
   render () {
-    const gameboard = this.gameBoard()
+    const gameboard = this.gameBoard();
 
     return (
       <div>
         {gameboard}
       </div>
-    )
+    );
   }
 
   clickHandler (index, move) {
-    const squares = this.state.squares
-    const round = this.state.round
+    const squares = this.state.squares;
+    const round = this.state.round;
 
     if (squares[index] === 'O' || squares[index] === 'X') {
-      return
+      return;
     }
 
-    squares[index] = move
-    this.checkWin(index, move)
+    squares[index] = move;
+    this.checkWin(index, move);
 
     this.setState({
       squares,
       turn: move === 'O' ? 'X' : 'O',
-      round: round + 1
-    })
+      round: round + 1,
+    });
   }
 
   gameBoard () {
@@ -55,11 +55,11 @@ export default class Game extends React.Component {
                 turn={this.state.turn}
                 handleClick={this.clickHandler.bind(this, i)}
               />
-            )
+          );
           }, this)
         }
       </div>
-    )
+    );
   }
 
   // checkWin (index, move) {
@@ -97,8 +97,8 @@ export default class Game extends React.Component {
   // }
 
   autoTurn (move) {
-    const compTurn = this.randNum()
-    const squares = this.state.squares
+    const compTurn = this.randNum();
+    const squares = this.state.squares;
 
     if (squares[compTurn] !== '') {
       //
@@ -106,6 +106,6 @@ export default class Game extends React.Component {
   }
 
   randNum () {
-    return Math.floor(Math.random() * 9)
+    return Math.floor(Math.random() * 9);
   }
 }
