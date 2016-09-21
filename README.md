@@ -1,9 +1,21 @@
-# ticTacToe
-tic tac toe with react.js
+# Noughts and Crosses
+Noughts and Crosses (tic tac toe) with react.js
 
-npm install 
 
-**Watch files**	 : watch ./node_modules/.bin/webpack js/index.jsx main.js
+## Getting Started
 
-**To start server**	 : ./node_modules/.bin/http-server
+clone repo locally
 
+    npm install
+
+**Watch files:**
+
+to watch files run
+
+    npm run dev
+
+**To start server:**
+
+to run the game locally
+
+    npm start
