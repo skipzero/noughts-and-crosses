@@ -1,5 +1,6 @@
 module.exports = {
-  extends: 'eslint:recommended',
+  plugins: ['react'],
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
   env: {
     browser: true,
     // Allows module/require syntax
@@ -7,7 +8,7 @@ module.exports = {
     es6: true
   },
   globals: {
-    TOUT: false
+
   },
   parser: 'babel-eslint',
   rules: {

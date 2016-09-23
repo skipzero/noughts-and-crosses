@@ -1,51 +1,77 @@
-const autoprefixer = require('autoprefixer')
-const webpack = require('webpack')
-const path = require('path')
+const extractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const webpack = require('webpack');
+const path = require('path');
 
-const BUILD_DIR = path.resolve(__dirname, 'dist/')
-const APP_DIR = path.resolve(__dirname, 'src/')
-
-const sassLoaders = [
-  'css-Loader',
-  'postcss-loader',
-  `sass-loader?indentedSyntax=sass&includePaths[]=${APP_DIR}`
-]
-
-const config = {
-  entry: {
-    app: [`${APP_DIR}/index`]
-  },
-
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?/,
-        include: APP_DIR,
-        exclude: /node_modules/,
-        loaders: ['babel-loader']
-      },
-
-      {
-        test: /\.js?/,
-        exclude: /node_modules/,
-        loaders: ['babel-loader', 'eslint-loader']
-      },
-
-      {
-        test: /\/.sass?/,
-        loaders: ['style-loader', 'css-loader', 'postcss-loader']
-      }
-    ]
-  },
-
-  eslint: {
-    configFile: './.eslintrc.js'
-  },
-
-  output: {
-    path: BUILD_DIR,
-    filename: 'bundle.js'
-  }
+const PATH = {
+  app: path.resolve(__dirname, 'src/'),
+  build: path.resolve(__dirname, 'dist/'),
 }
 
-module.exports = config
+const extractSASS = new extractTextPlugin(`${PATH.build}/css/[name].scss`);
+const extractCSS = new extractTextPlugin(`${PATH.build}/css/[name].css`);
+
+const styleLoaders = [
+  'style',
+  'css?sourceMap',
+  'resolve-url',
+  'sass?sourceMap',
+];
+
+const config = {
+  debug: true,
+  entry: [`${PATH.app}/index.js`],
+  output: {
+    filename: `${PATH.build}/js/bundle.js`,
+  },
+
+  devtool: 'source-map',
+  module: {
+    preLoaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'source-map',
+      },
+    ],
+
+    loaders: [
+      // styleLoaders,
+      {
+        test: /\.css$/,
+        loader: extractCSS.extract('style', 'css?sourceMap', 'resolve-url', 'sass?sourceMap'),
+      },
+
+      {
+        test: /\.scss$/,
+        loaders: styleLoaders,  //   extractSASS.extract('style', 'css?sourceMap', 'resolve-url', 'sass?sourceMap'),
+      },
+
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+          'url?limit=8192',
+          'img',
+        ],
+      },
+
+      {
+        test: /\.jsx?$/im,
+        exclude: /node_modules/,
+        loaders: [
+          'babel',
+        ],
+      },
+    ],
+  },
+
+  devServer: {
+    contentBase: './dist',
+  },
+  plugins: [
+    // extractSASS,
+    // extractCSS,
+  ]
+};
+
+module.exports = config;

@@ -1,0 +1,26 @@
+#game {
+  #gameBoard {
+    border: 1px solid #f00;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin: 60px auto 0;
+    padding: 5px;
+    width: 500px;
+    height: 500px;
+
+    .square {
+      border: 1px solid #0f0;
+      margin: 5px;
+      width: 150px;
+      height: 150px;
+    }
+  }
+}
+
+.square {
+  border: 1px solid #0f0;
+  margin: 5px;
+  width: 100px;
+  height: 100px;
+}
