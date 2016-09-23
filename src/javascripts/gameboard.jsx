@@ -29,7 +29,7 @@ export default class Game extends React.Component {
   clickHandler (index, turn) {
     const squares = this.state.squares;
     const round = this.state.round;
-console.log('SquareClick', squares[index])
+
     if (squares[index] === 'O' || squares[index] === 'X') {
       return;
     }
@@ -48,14 +48,13 @@ console.log('SquareClick', squares[index])
     return (
       <div id='gameBoard'> {
           this.state.squares.map((square, i) => {
-
             return (
               <Square
                 key={i}
                 index={i}
                 status={square}
                 turn={this.state.turn}
-                handleClick={this.clickHandler.bind(this, i)}
+                handleClick={this.clickHandler.bind(this)}
               />
           );
           }, this)
@@ -66,7 +65,7 @@ console.log('SquareClick', squares[index])
 
   checkWin (index, turn) {
     const squares = this.state.squares;
-
+console.log('CheckWinnnn...', squares[index], turn, this.state.round)
     const winArray = [
       [0, 1, 2],
       [0, 3, 6],
@@ -94,10 +93,16 @@ console.log('SquareClick', squares[index])
       //  Check if any of our winning conditions are met...
       if (squares[currArr1] === squares[currArr2] && squares[currArr1] === squares[currArr3] && squares[currArr1] !== '') {
         //  TODO: add winner verbage over the console log
-        message = `The ${move}'s win!! Good job. Play again!`
+        message = `The ${turn}'s win!! Good job. Play again!`
       }
       else {
         this.autoTurn(turn);
+      }
+
+      if (message !== '') {
+        this.setState({
+          message
+        })
       }
     }
   }
