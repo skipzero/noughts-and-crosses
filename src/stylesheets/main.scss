@@ -1,10 +1,23 @@
+html, body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  font-size: 10px;
+}
+
 #game {
+  text-align: center;
+  width: 550px;
+  margin: 10px auto 25px;
+  padding: 5px;
+
   #gameBoard {
     border: 1px solid #f00;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    margin: 60px auto 0;
+    margin: 0 auto 0;
     padding: 5px;
     width: 500px;
     height: 500px;
@@ -14,17 +27,21 @@
       font-size: 150px;
       font-weight: bold;
       line-height: 140px;
-      text-align: center;
-      margin: 5px;
       width: 150px;
       height: 150px;
     }
   }
-}
 
-.square {
-  border: 1px solid #0f0;
-  margin: 5px;
-  width: 100px;
-  height: 100px;
+  .replay {
+    width: 50px;
+    height: 50px;
+    background: #ccc;
+  }
+  
+  #messages {
+    font-size: 30px;
+    font-weight: bold;
+    height: 60px;
+    width: 540px;
+  }
 }

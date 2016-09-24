@@ -4,10 +4,10 @@ import Square from './square.jsx';
 export default class Game extends React.Component {
   constructor (props) {
     super(props);
-    this.state = this.cleanState();
+    this.state = this.initState();
   }
 
-  cleanState () {
+  initState () {
     return {
       squares: Array(9).fill(''),
       turn: 'O',
@@ -21,7 +21,9 @@ export default class Game extends React.Component {
 
     return (
       <div>
+        <div id='messages'>{this.state.message}</div>
         {gameboard}
+        <div className='replay' onClick={this.clickHandler.bind(this)}></div>
       </div>
     );
   }
@@ -30,18 +32,22 @@ export default class Game extends React.Component {
     const squares = this.state.squares;
     const round = this.state.round;
 
-    if (squares[index] === 'O' || squares[index] === 'X') {
+    if (squares[index] === undefined) {
+      this.setState(this.initState);
+    }
+
+    if (squares[index] !== '') {
       return;
     }
 
     squares[index] = turn;
-    this.checkWin(index, turn);
 
     this.setState({
       squares,
       turn: turn === 'O' ? 'X' : 'O',
       round: round + 1,
     });
+    this.checkWin(index, turn);
   }
 
   gameBoard () {
@@ -56,7 +62,7 @@ export default class Game extends React.Component {
                 turn={this.state.turn}
                 handleClick={this.clickHandler.bind(this)}
               />
-          );
+            )
           }, this)
         }
       </div>
@@ -65,7 +71,7 @@ export default class Game extends React.Component {
 
   checkWin (index, turn) {
     const squares = this.state.squares;
-console.log('CheckWinnnn...', squares[index], turn, this.state.round)
+console.log('CheckWinnnn...', squares[index], turn, index)
     const winArray = [
       [0, 1, 2],
       [0, 3, 6],
@@ -85,18 +91,15 @@ console.log('CheckWinnnn...', squares[index], turn, this.state.round)
       const currArr2 = winArray[i][1];
       const currArr3 = winArray[i][2];
 
-      if (round === 9) {
-        // Tie game TODO: add verbage to declare tied...
-        message = 'Game Over, man... Tie game... No winner...'
-      }
-
       //  Check if any of our winning conditions are met...
       if (squares[currArr1] === squares[currArr2] && squares[currArr1] === squares[currArr3] && squares[currArr1] !== '') {
-        //  TODO: add winner verbage over the console log
+
         message = `The ${turn}'s win!! Good job. Play again!`
       }
-      else {
-        this.autoTurn(turn);
+      else if (round === 9) {
+        // Tie game TODO: add verbage to declare tied...
+        console.log('Tie...')
+        message = 'Game Over!\n Tie game... No winner...'
       }
 
       if (message !== '') {
@@ -105,15 +108,27 @@ console.log('CheckWinnnn...', squares[index], turn, this.state.round)
         })
       }
     }
+    setTimeout(this.compTurn.bind(this), 2000)
   }
 
-  autoTurn (turn) {
-    const compTurn = this.randNum();
+  compTurn () {
+    const compIndex = this.randNum();
+    const round = this.state.round;
     const squares = this.state.squares;
 
-    if (squares[compTurn] !== '') {
-      //
+    let turn = this.state.turn;
+
+    if (squares[compIndex] !== '') {
+      this.compTurn(turn);
     }
+
+    squares[compIndex] = turn;
+
+    this.setState({
+      squares,
+      turn: turn === 'O' ? 'X' : 'O',
+      round: round + 1,
+    });
   }
 
   randNum () {

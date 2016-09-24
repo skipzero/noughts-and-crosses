@@ -1,4 +1,4 @@
-const extractTextPlugin = require('extract-text-webpack-plugin');
+// const extractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const path = require('path');
@@ -8,8 +8,9 @@ const PATH = {
   build: path.resolve(__dirname, 'dist/'),
 }
 
-const extractSASS = new extractTextPlugin(`${PATH.build}/css/[name].scss`);
-const extractCSS = new extractTextPlugin(`${PATH.build}/css/[name].css`);
+//  Was going to extract the css... but why for a simple game not going to 'Production'?
+// const extractSASS = new extractTextPlugin(`${PATH.build}/css/[name].scss`);
+// const extractCSS = new extractTextPlugin(`${PATH.build}/css/[name].css`);
 
 const styleLoaders = [
   'style',
@@ -39,7 +40,7 @@ const config = {
       // styleLoaders,
       {
         test: /\.css$/,
-        loader: extractCSS.extract('style', 'css?sourceMap', 'resolve-url', 'sass?sourceMap'),
+        loader: styleLoaders,  //  extractCSS.extract('style', 'css?sourceMap', 'resolve-url', 'sass?sourceMap'),
       },
 
       {
