@@ -11,14 +11,14 @@ export default class Game extends React.Component {
     return {
       squares: Array(9).fill(''),
       turn: 'O',
-      round: 1,
+      round: 0,
       message: '',
+      selected: [],
     };
   }
 
   render () {
     const gameboard = this.gameBoard();
-
     return (
       <div>
         <div id='messages'>{this.state.message}</div>
@@ -26,28 +26,6 @@ export default class Game extends React.Component {
         <div className='replay' onClick={this.clickHandler.bind(this)}></div>
       </div>
     );
-  }
-
-  clickHandler (index, turn) {
-    const squares = this.state.squares;
-    const round = this.state.round;
-
-    if (squares[index] === undefined) {
-      this.setState(this.initState);
-    }
-
-    if (squares[index] !== '') {
-      return;
-    }
-
-    squares[index] = turn;
-
-    this.setState({
-      squares,
-      turn: turn === 'O' ? 'X' : 'O',
-      round: round + 1,
-    });
-    this.checkWin(index, turn);
   }
 
   gameBoard () {
@@ -69,9 +47,40 @@ export default class Game extends React.Component {
     );
   }
 
+  clickHandler (index, turn) {
+    const squares = this.state.squares;
+    const selected = this.state.selected;
+
+    let round = this.state.round;
+
+    if (squares[index] === undefined) {  //  test if it's our reset button
+      this.setState(this.initState);
+    }
+
+    if (squares[index] !== '') {
+      return;
+    }
+
+    squares[index] = turn;
+    selected.push(index);
+console.log('player', 'r', round, 't', turn, 'i', index, 's', selected)
+console.log('THIS', this)
+    turn = this.nextTurn(turn);
+    round += 1;
+    this.setState({
+      squares,
+      turn,
+      round,
+      selected,
+    });
+    this.checkWin(index, turn);
+    const timer = setTimeout(this.compTurn.bind(this), 1000);
+
+  }
+
   checkWin (index, turn) {
     const squares = this.state.squares;
-console.log('CheckWinnnn...', squares[index], turn, index)
+console.log(this.state.round, 'CheckWinnnn...', squares, turn, index)
     const winArray = [
       [0, 1, 2],
       [0, 3, 6],
@@ -85,6 +94,7 @@ console.log('CheckWinnnn...', squares[index], turn, index)
 
     let message = this.state.message;
     let round = this.state.round;
+    let timer;
 
     for (let i = 0; i < winArray.length - 1; i++) {
       const currArr1 = winArray[i][0];
@@ -93,13 +103,14 @@ console.log('CheckWinnnn...', squares[index], turn, index)
 
       //  Check if any of our winning conditions are met...
       if (squares[currArr1] === squares[currArr2] && squares[currArr1] === squares[currArr3] && squares[currArr1] !== '') {
-
-        message = `The ${turn}'s win!! Good job. Play again!`
+        message = `The ${turn}'s win!! Good job. Play again!`;
+        break;
       }
       else if (round === 9) {
         // Tie game TODO: add verbage to declare tied...
         console.log('Tie...')
-        message = 'Game Over!\n Tie game... No winner...'
+        message = 'Game Over!\n Tie game... No winner...';
+        break;
       }
 
       if (message !== '') {
@@ -108,30 +119,53 @@ console.log('CheckWinnnn...', squares[index], turn, index)
         })
       }
     }
-    setTimeout(this.compTurn.bind(this), 2000)
   }
 
   compTurn () {
-    const compIndex = this.randNum();
-    const round = this.state.round;
     const squares = this.state.squares;
+    const selected = this.state.selected;
 
+    let round = this.state.round;
     let turn = this.state.turn;
+    let index = this.randNum.call(this);
 
-    if (squares[compIndex] !== '') {
-      this.compTurn(turn);
-    }
+    squares[index] = turn;
+    selected.push(index);
 
-    squares[compIndex] = turn;
 
+    this.checkWin(index, turn);
+console.log('computer', 'r', round, 't', turn, 'i', index, 's', selected)
+console.log('THIS', this)
+    turn = this.nextTurn(turn);
+    round += 1;
     this.setState({
       squares,
-      turn: turn === 'O' ? 'X' : 'O',
-      round: round + 1,
+      turn,
+      round,
+      selected,
     });
   }
 
+  nextTurn (turn) {
+    return turn = turn === 'O' ? 'X' : 'O';
+  }
+
   randNum () {
-    return Math.floor(Math.random() * 9);
+    let newIndex = Math.floor(Math.random() * 9);
+    const selected = this.state.selected;
+console.log('Random', selected, newIndex)
+    if (selected.length <= 9) {
+
+      selected.forEach((cur) => {
+        if (cur === newIndex) {
+console.log('new random', newIndex, selected)
+          this.randNum();
+          return;
+        }
+      });
+      return newIndex;
+    } else {
+      return;
+    }
   }
 }
