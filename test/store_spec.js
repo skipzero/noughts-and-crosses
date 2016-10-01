@@ -52,7 +52,7 @@ describe('Store', () => {
         ]);
       })
 
-      it('last square is o', () => {
+      it('first square last row is o', () => {
         instance.action({
           type: 'turn',
           x: 0,

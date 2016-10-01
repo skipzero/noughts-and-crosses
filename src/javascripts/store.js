@@ -20,11 +20,12 @@ class Store {
     const {x, y, type, marker} = obj;
     this.gameboard = this.gameboard.map((row, yIndex) => {
       return row.map((square, xIndex) => {
+        if(yIndex === y && xIndex === x) {
+          return marker;
+        }
         return square;
       })
-    })
-    this.gameboard[y][x] = marker;
-
+    });
   }
 }
 
