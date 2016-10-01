@@ -63,8 +63,6 @@ export default class Game extends React.Component {
 
     squares[index] = turn;
     selected.push(index);
-console.log('player', 'r', round, 't', turn, 'i', index, 's', selected)
-console.log('THIS', this)
     turn = this.nextTurn(turn);
     round += 1;
     this.setState({
@@ -80,7 +78,6 @@ console.log('THIS', this)
 
   checkWin (index, turn) {
     const squares = this.state.squares;
-console.log(this.state.round, 'CheckWinnnn...', squares, turn, index)
     const winArray = [
       [0, 1, 2],
       [0, 3, 6],
@@ -108,7 +105,7 @@ console.log(this.state.round, 'CheckWinnnn...', squares, turn, index)
       }
       else if (round === 9) {
         // Tie game TODO: add verbage to declare tied...
-        console.log('Tie...')
+        console.info('Tie...')
         message = 'Game Over!\n Tie game... No winner...';
         break;
       }
@@ -134,8 +131,6 @@ console.log(this.state.round, 'CheckWinnnn...', squares, turn, index)
 
 
     this.checkWin(index, turn);
-console.log('computer', 'r', round, 't', turn, 'i', index, 's', selected)
-console.log('THIS', this)
     turn = this.nextTurn(turn);
     round += 1;
     this.setState({
@@ -153,12 +148,10 @@ console.log('THIS', this)
   randNum () {
     let newIndex = Math.floor(Math.random() * 9);
     const selected = this.state.selected;
-console.log('Random', selected, newIndex)
     if (selected.length <= 9) {
 
       selected.forEach((cur) => {
         if (cur === newIndex) {
-console.log('new random', newIndex, selected)
           this.randNum();
           return;
         }
