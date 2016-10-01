@@ -90,6 +90,30 @@ describe('Store', () => {
           [0, 0, 'x'],
         ]);
       });
+
+      // TODO: refactor to an array of object to test against. map with the array to the test function.
+      it ('can\'t place on a marked square', () => {
+        instance.action({
+          type: 'turn',
+          x: 1,
+          y: 1,
+          marker: 'o',
+        });
+
+        instance.action({
+          type: 'turn',
+          x: 1,
+          y: 1,
+          marker: 'x',
+        });
+
+        const actual = instance.getState('gameboard');
+        expect(actual).to.eql([
+          [0, 0, 0],
+          [0, 'o', 0],
+          [0, 0, 0],
+        ]);
+      });
     });
   });
 });
