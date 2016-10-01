@@ -1,13 +1,18 @@
 class Store {
-  getState (id) {
+  constructor () {
     const square = Array(3).fill(0);
-    const gameArray = Array(3).fill(square);
+    const gameboard = Array(3).fill(square);
+    this.gameboard = gameboard;
+    this.message = '';
+  }
+
+  getState (id) {
 
     if (id === 'gameboard') {
-      return gameArray;
+      return this.gameboard;
     }
     if (id === 'message') {
-      return '';
+      return this.message;
     }
   }
 
