@@ -3,5 +3,8 @@ require('./stylesheets/main.scss');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Game from './javascripts/gameboard.jsx';
+import Store from './javascripts/store.js';
 
-ReactDOM.render(<Game />, document.getElementById('game'));
+window.store = new Store();
+
+ReactDOM.render(<Game store={window.store} />, document.getElementById('game'));

@@ -4,45 +4,52 @@ import Square from './square.jsx';
 export default class Game extends React.Component {
   constructor (props) {
     super(props);
-    this.state = this.initState();
   }
 
-  initState () {
-    return {
-      squares: Array(9).fill(''),
-      turn: 'O',
-      round: 0,
-      message: '',
-      selected: [],
-    };
+  // initState () {
+  //   return {
+  //     squares: Array(9).fill(''),
+  //     turn: 'O',
+  //     round: 0,
+  //     message: '',
+  //     selected: [],
+  //   };
+  // }
+
+  gameBoard () {
+    const gameboard = this.props.store.getState('gameboard');
+
+    return gameboard.map((row, index) => {
+      return row.map((square, index) => {
+        return (
+          <div className='square'></div>
+          )
+      });
+    });
+          // gameboard.map((square, i) => {
+          //   return (
+          //     <Square
+          //       key={i}
+          //       index={i}
+          //       status={square}
+          //       turn={this.state.turn}
+          //       handleClick={this.clickHandler.bind(this)}
+          //     />
+          //   )
+          // }, this)
+    //     }
+    //   </div>
+    // );
   }
 
   render () {
+    const store = this.props.store;
     const gameboard = this.gameBoard();
     return (
       <div>
-        <div id='messages'>{this.state.message}</div>
+        <div id='messages'>{store.getState('message')}</div>
         {gameboard}
         <div className='replay' onClick={this.clickHandler.bind(this)}></div>
-      </div>
-    );
-  }
-
-  gameBoard () {
-    return (
-      <div id='gameBoard'> {
-          this.state.squares.map((square, i) => {
-            return (
-              <Square
-                key={i}
-                index={i}
-                status={square}
-                turn={this.state.turn}
-                handleClick={this.clickHandler.bind(this)}
-              />
-            )
-          }, this)
-        }
       </div>
     );
   }
