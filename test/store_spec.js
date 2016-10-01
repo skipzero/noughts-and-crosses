@@ -58,7 +58,7 @@ describe('Store', () => {
           x: 0,
           y: 2,
           marker: 'o',
-        })
+        });
 
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
@@ -66,7 +66,30 @@ describe('Store', () => {
           [0, 0, 0],
           ['o', 0, 0],
         ]);
-      })
-    })
+      });
+
+      it('can place x & o', () => {
+        instance.action({
+          type: 'turn',
+          x: 1,
+          y: 0,
+          marker: 'o',
+        });
+
+        instance.action({
+          type: 'turn',
+          x: 2,
+          y: 2,
+          marker: 'x',
+        });
+
+        const actual = instance.getState('gameboard');
+        expect(actual).to.eql([
+          [0, 'o', 0],
+          [0, 0, 0],
+          [0, 0, 'x'],
+        ]);
+      });
+    });
   });
 });
