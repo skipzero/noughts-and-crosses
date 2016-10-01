@@ -16,7 +16,16 @@ class Store {
     }
   }
 
+  action (obj) {
+    const {x, y, type, marker} = obj;
+    this.gameboard = this.gameboard.map((row, yIndex) => {
+      return row.map((square, xIndex) => {
+        return square;
+      })
+    })
+    this.gameboard[y][x] = marker;
 
+  }
 }
 
 

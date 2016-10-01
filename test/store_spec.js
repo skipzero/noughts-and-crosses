@@ -35,5 +35,38 @@ describe('Store', () => {
         expect(actual).to.eql('');
       })
     });
+
+    describe('.action', () => {
+      it('center square is x', () => {
+        instance.action({
+          type: 'turn',
+          x: 1,
+          y: 1,
+          marker: 'x',
+        })
+        const actual = instance.getState('gameboard');
+        expect(actual).to.eql([
+          [0, 0, 0],
+          [0, 'x', 0],
+          [0, 0, 0],
+        ]);
+      })
+
+      it('last square is o', () => {
+        instance.action({
+          type: 'turn',
+          x: 0,
+          y: 2,
+          marker: 'o',
+        })
+
+        const actual = instance.getState('gameboard');
+        expect(actual).to.eql([
+          [0, 0, 0],
+          [0, 0, 0],
+          ['o', 0, 0],
+        ]);
+      })
+    })
   });
 });
