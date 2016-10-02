@@ -1,7 +1,6 @@
 import React from 'react';
-// import Square from './square.jsx';
 
-export default class Game extends React.Component {
+export default class Board extends React.Component {
   constructor (props) {
     super(props);
   }
@@ -16,20 +15,6 @@ export default class Game extends React.Component {
           )
       });
     });
-          // gameboard.map((square, i) => {
-          //   return (
-          //     <Square
-          //       key={i}
-          //       index={i}
-          //       status={square}
-          //       turn={this.state.turn}
-          //       handleClick={this.clickHandler.bind(this)}
-          //     />
-          //   )
-          // }, this)
-    //     }
-    //   </div>
-    // );
   }
 
   render () {
@@ -38,7 +23,9 @@ export default class Game extends React.Component {
     return (
       <div>
         <div id='messages'>{store.getState('message')}</div>
-        {gameboard}
+          <div className='gameBoard'>
+            {gameboard}
+          </div>
         <div className='replay' onClick={this.clickHandler.bind(this)}></div>
       </div>
     );
@@ -159,3 +146,5 @@ export default class Game extends React.Component {
     }
   }
 }
+
+module.export = Board;

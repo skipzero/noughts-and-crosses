@@ -12,6 +12,15 @@ html {
   margin: 10px auto 25px;
   padding: 5px;
 
+  .square {
+    border: 1px solid #0f0;
+    font-size: 150px;
+    font-weight: bold;
+    line-height: 140px;
+    width: 150px;
+    height: 150px;
+  }
+
   #gameBoard {
     border: 1px solid #f00;
     display: flex;
@@ -37,7 +46,7 @@ html {
     height: 50px;
     background: #ccc;
   }
-  
+
   #messages {
     font-size: 30px;
     font-weight: bold;
