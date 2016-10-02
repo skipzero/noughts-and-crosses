@@ -129,7 +129,7 @@ describe('Store', () => {
           y: 1,
           marker: 'x',
         });
-        
+
         const actual = instance.getState('message');
         expect(actual).to.be('Pick an unoccupied square, hoser.')
       })

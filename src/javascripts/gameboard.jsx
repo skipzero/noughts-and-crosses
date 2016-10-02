@@ -1,20 +1,10 @@
 import React from 'react';
-import Square from './square.jsx';
+// import Square from './square.jsx';
 
 export default class Game extends React.Component {
   constructor (props) {
     super(props);
   }
-
-  // initState () {
-  //   return {
-  //     squares: Array(9).fill(''),
-  //     turn: 'O',
-  //     round: 0,
-  //     message: '',
-  //     selected: [],
-  //   };
-  // }
 
   gameBoard () {
     const gameboard = this.props.store.getState('gameboard');

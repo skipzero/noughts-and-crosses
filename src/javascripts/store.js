@@ -13,6 +13,7 @@ class Store {
     if (id === 'message') {
       return this.message;
     }
+    return id;
   }
 
   action (obj) {
