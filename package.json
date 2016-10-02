@@ -9,12 +9,13 @@
   },
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "./node_modules/.bin/webpack-dev-server -d --progress --colors --port 3000",
     "clean": "rm -rf node_modules dist",
     "build": "npm run clean && npm i && webpack -p",
     "dev": "webpack --progress --colors -d --watch",
-    "server": "cd dist && http-server -p 3000"
+    "server": "cd dist && http-server -p 3000",
+    "lint": ""
   },
   "author": "skip mcbride",
   "license": "MIT",

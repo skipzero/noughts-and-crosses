@@ -30,6 +30,11 @@ const config = {
   module: {
     preLoaders: [
       {
+          test: /\.jsx*?$/,
+          loader: 'eslint',
+          exclude: /node_modules/
+      },
+      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'source-map',
@@ -57,7 +62,7 @@ const config = {
       },
 
       {
-        test: /\.jsx?$/im,
+        test: /\.jsx*?$/,
         exclude: /node_modules/,
         loaders: [
           'babel',
@@ -65,9 +70,12 @@ const config = {
       },
     ],
   },
-
   devServer: {
     contentBase: './dist',
+  },
+  eslint: {
+      failOnWarning: false,
+      failOnError: false,
   },
   plugins: [
     // extractSASS,

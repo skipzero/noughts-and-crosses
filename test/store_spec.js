@@ -114,6 +114,25 @@ describe('Store', () => {
           [0, 0, 0],
         ]);
       });
+
+      it ('message has text and meaning', () => {
+        instance.action({
+          type: 'turn',
+          x: 1,
+          y: 1,
+          marker: 'o',
+        });
+
+        instance.action({
+          type: 'turn',
+          x: 1,
+          y: 1,
+          marker: 'x',
+        });
+        
+        const actual = instance.getState('message');
+        expect(actual).to.be('Pick an unoccupied square, hoser.')
+      })
     });
   });
 });

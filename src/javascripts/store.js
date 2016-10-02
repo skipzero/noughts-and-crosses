@@ -7,7 +7,6 @@ class Store {
   }
 
   getState (id) {
-
     if (id === 'gameboard') {
       return this.gameboard;
     }
@@ -24,8 +23,9 @@ class Store {
           return marker;
         }
         return square;
-      })
+      });
     });
+    this.message = 'Pick an unoccupied square, hoser.';
   }
 }
 
