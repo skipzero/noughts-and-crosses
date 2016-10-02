@@ -23,7 +23,7 @@ export default class Board extends React.Component {
     return (
       <div>
         <div id='messages'>{store.getState('message')}</div>
-          <div className='gameBoard'>
+          <div id='gameBoard'>
             {gameboard}
           </div>
         <div className='replay' onClick={this.clickHandler.bind(this)}></div>
