@@ -1,9 +1,13 @@
 const Store = require('./store');
-const board = require('./board');
 
-const ai = () => {
+class Ai {
+  constructor () {
+    const trials = 1000;
+    const store = new Store();
 
-  return {};
+    this.board = store.getState();
+  }
+
 }
 
-module.exports = ai;
+module.exports = Ai;
