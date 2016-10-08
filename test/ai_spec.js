@@ -1,5 +1,5 @@
 const expect = require('expect.js');
-const Ai = require('../src/javascripts/ai');
+const ai = require('../src/javascripts/ai');
 
 describe('Our Ai ', () => {
   it('is a function', () => {
@@ -23,7 +23,7 @@ describe('Our Ai ', () => {
 
     describe('.board', () => {
       it('should be an array', () => {
-        expect(instance.board).to.be.an('array');
+        expect(instance).to.be.an('object');
       });
     });
   });

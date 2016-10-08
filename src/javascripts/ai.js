@@ -1,13 +1,12 @@
 const Store = require('./store');
 
-const ai = () => {
-  const trials = 1000;
-  const store = new Store();
+class Ai {
+  constructor () {
+    const trials = 1000;
+    const store = new Store();
 
-  const board = store.getState();
-  console.log('BOARD', board);
+    this.board = store.getState();
+  }
 }
 
-ai();
-
-module.exports = ai;
+module.exports = Ai;
