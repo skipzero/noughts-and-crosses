@@ -132,6 +132,24 @@ describe('Store', () => {
 
         const actual = instance.getState('message');
         expect(actual).to.be('Pick an unoccupied square, hoser.')
+      });
+    });
+
+    describe('.onChange', () => {
+      it('throws error without a function', () => {
+        expect(function () {
+          instance.onChange();
+        }).to.throwError();
+      });
+
+      it('is called on action trigger', (done) => {
+        instance.action({
+          type: 'turn',
+          x: 1,
+          y: 1,
+          marker: 'x',
+        });
+        instance.onChange(done)
       })
     });
   });
