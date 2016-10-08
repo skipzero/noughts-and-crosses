@@ -26,17 +26,16 @@ class Store {
         return square;
       });
     });
-    
+
     this.message = 'Pick an unoccupied square, hoser.';
   }
 
-  onChange (callback) {
+  register (callback) {
     if (!callback) {
       throw new Error('onChange needs a callback')
     }
+    callback();
   }
 }
-
-
 
 module.exports = Store;

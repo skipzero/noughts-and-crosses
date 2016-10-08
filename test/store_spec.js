@@ -135,7 +135,7 @@ describe('Store', () => {
       });
     });
 
-    describe('.onChange', () => {
+    describe('.register', () => {
       it('throws error without a function', () => {
         expect(function () {
           instance.onChange();
@@ -150,6 +150,13 @@ describe('Store', () => {
           marker: 'x',
         });
         instance.onChange(done)
+      });
+
+      it('shouldnt fire if theres no action', () => {
+        instance.register(function () {
+
+        });
+        expect().to.fail();
       })
     });
   });
