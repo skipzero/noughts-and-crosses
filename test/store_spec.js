@@ -138,25 +138,25 @@ describe('Store', () => {
     describe('.register', () => {
       it('throws error without a function', () => {
         expect(function () {
-          instance.onChange();
+          instance.register();
         }).to.throwError();
       });
 
-      it('is called on action trigger', (done) => {
+      it('callback passed to register is triggered by action', (done) => {
+        instance.register(done);
         instance.action({
           type: 'turn',
           x: 1,
           y: 1,
           marker: 'x',
         });
-        instance.onChange(done)
       });
 
-      it('shouldnt fire if theres no action', () => {
-        instance.register(function () {
-
+      it('shouldnt fire if theres no action', (done) => {
+        instance.register(() => {
+          expect().to.fail();
         });
-        expect().to.fail();
+        setTimeout(done, 500);
       })
     });
   });

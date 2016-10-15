@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import Game from './javascripts/board.jsx';
 import Store from './javascripts/store.js';
 
-window.store = new Store();
+const store = new Store();
+window.storeG = store;
 
-ReactDOM.render(<Game store={window.store} />, document.getElementById('game'));
+ReactDOM.render(<Game store={store} />, document.getElementById('game'));

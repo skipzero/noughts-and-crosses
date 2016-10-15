@@ -3,15 +3,19 @@ import React from 'react';
 export default class Board extends React.Component {
   constructor (props) {
     super(props);
+    props.store.register(() => {
+      debugger;
+    })
   }
 
   gameBoard () {
     const gameboard = this.props.store.getState('gameboard');
+    const handleClick = this.clickHandler.bind(this);
 
     return gameboard.map((row, index) => {
       return row.map((square, index) => {
         return (
-          <div className='square'></div>
+          <div className='square' onClick={handleClick}></div>
           )
       });
     });
@@ -26,38 +30,18 @@ export default class Board extends React.Component {
           <div id='gameBoard'>
             {gameboard}
           </div>
-        <div className='replay' onClick={this.clickHandler.bind(this)}></div>
+        <div className='replay' onClick={this.clickHandler}></div>
       </div>
     );
   }
 
-  clickHandler (index, turn) {
-    const squares = this.state.squares;
-    const selected = this.state.selected;
-
-    let round = this.state.round;
-
-    if (squares[index] === undefined) {  //  test if it's our reset button
-      this.setState(this.initState);
-    }
-
-    if (squares[index] !== '') {
-      return;
-    }
-
-    squares[index] = turn;
-    selected.push(index);
-    turn = this.nextTurn(turn);
-    round += 1;
-    this.setState({
-      squares,
-      turn,
-      round,
-      selected,
+  clickHandler () {
+    this.props.store.action({
+      type: 'turn',
+      x: 1,
+      y: 1,
+      marker: 'x',
     });
-    this.checkWin(index, turn);
-    const timer = setTimeout(this.compTurn.bind(this), 1000);
-
   }
 
   checkWin (index, turn) {
