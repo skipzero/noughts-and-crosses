@@ -3,19 +3,22 @@ import React from 'react';
 export default class Board extends React.Component {
   constructor (props) {
     super(props);
-    props.store.register(() => {
-      debugger;
-    })
+    props.store.register(this.updateState.bind(this));
+  }
+
+  updateState () {
+    const newState = this.props.store.getState('gameboard');
+    this.setState(newState);
   }
 
   gameBoard () {
     const gameboard = this.props.store.getState('gameboard');
-    const handleClick = this.clickHandler.bind(this);
 
-    return gameboard.map((row, index) => {
-      return row.map((square, index) => {
+    return gameboard.map((row, rowIndex) => {
+      return row.map((square, sqIndex) => {
+        const handleClick = this.clickHandler.bind(this, sqIndex, rowIndex);
         return (
-          <div className='square' onClick={handleClick}></div>
+          <div className='square' onClick={handleClick}>{square}</div>
           )
       });
     });
@@ -35,13 +38,15 @@ export default class Board extends React.Component {
     );
   }
 
-  clickHandler () {
+  clickHandler (x, y) {
+    console.log(arguments)
     this.props.store.action({
       type: 'turn',
-      x: 1,
-      y: 1,
+      x,
+      y,
       marker: 'x',
     });
+
   }
 
   checkWin (index, turn) {
