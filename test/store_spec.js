@@ -157,7 +157,20 @@ describe('Store', () => {
           expect().to.fail();
         });
         setTimeout(done, 500);
-      })
+      });
+    });
+
+    describe('.marker', () => {
+      it('toggles between an x & an o', () => {
+        console.log('Marker', instance.marker)
+        instance.action({
+          type: 'turn',
+          x: 2,
+          y: 0,
+          marker: 'x',
+        });
+        expect(instance.marker).to.be('o');
+      });
     });
   });
 });
