@@ -5,11 +5,6 @@ class Store {
     this.gameboard = gameboard;
     this.message = '';
     this.marker = 'o';
-    this.isValid = square === '' ? true : false;
-  }
-
-  getMarker () {
-    console.log('get marker', this.marker)
   }
 
   getState (id) {
@@ -28,7 +23,7 @@ class Store {
 
       return row.map((square, xIndex) => {
         const targetSquare = (yIndex === y && xIndex === x);
-        const isEmpty = square == '';
+        const isEmpty = square === '';
         if (targetSquare) {
           if (!isEmpty) {
             this.message = 'Pick an unoccupied square, hoser.';
@@ -40,7 +35,7 @@ class Store {
         return square;
       });
     });
-    console.log('MARKER', this.marker, this.gameboard);
+
     if (this.callback) {
       this.callback();
     }
