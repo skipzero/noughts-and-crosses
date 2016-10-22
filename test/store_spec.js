@@ -123,7 +123,24 @@ describe('Store', () => {
         });
 
         const actual = instance.getState('message');
-        expect(actual).to.be('Pick an unoccupied square, hoser.')
+        expect(actual).to.be('Pick an unoccupied square, hoser.');
+      });
+
+      it('"Occupied box" message ONLY appears when choosing occupied square', () => {
+        instance.action({
+          type: 'turn',
+          x: 1,
+          y: 1,
+        });
+
+        instance.action({
+          type: 'turn',
+          x: 1,
+          y: 0,
+        });
+
+        const actual = instance.getState('message');
+        expect(actual).to.be('');
       });
 
       it('marker doesn\'t change when picking occupied square', () => {
@@ -188,7 +205,6 @@ describe('Store', () => {
           type: 'turn',
           x: 1,
           y: 1,
-          marker: 'x',
         });
       });
 
