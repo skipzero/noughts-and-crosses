@@ -125,54 +125,6 @@ describe('Store', () => {
         const actual = instance.getState('message');
         expect(actual).to.be('Pick an unoccupied square, hoser.')
       });
-    });
-
-    describe('.register', () => {
-      it('throws error without a function', () => {
-        expect(function () {
-          instance.register();
-        }).to.throwError();
-      });
-
-      it('callback passed to register is triggered by action', (done) => {
-        instance.register(done);
-        instance.action({
-          type: 'turn',
-          x: 1,
-          y: 1,
-          marker: 'x',
-        });
-      });
-
-      it('shouldnt fire if theres no action', (done) => {
-        instance.register(() => {
-          expect().to.fail();
-        });
-        setTimeout(done, 500);
-      });
-    });
-
-    describe('.marker', () => {
-      it('toggles between an x & an o', () => {
-        instance.action({
-          type: 'turn',
-          x: 2,
-          y: 0,
-        });
-
-        instance.action({
-          type: 'turn',
-          x: 2,
-          y: 2,
-        });
-
-        const actual = instance.getState('gameboard');
-        expect(actual).to.eql([
-          [0, 0, 'x'],
-          [0, 0, 0],
-          [0, 0, 'o'],
-        ]);
-      });
 
       it('marker doesn\'t change when picking occupied square', () => {
         instance.action({
@@ -199,6 +151,52 @@ describe('Store', () => {
           ['o', 0, 0],
           [0, 'x', 0],
         ]);
+      });
+
+      it('marker toggles between an x & an o', () => {
+        instance.action({
+          type: 'turn',
+          x: 2,
+          y: 0,
+        });
+
+        instance.action({
+          type: 'turn',
+          x: 2,
+          y: 2,
+        });
+
+        const actual = instance.getState('gameboard');
+        expect(actual).to.eql([
+          [0, 0, 'x'],
+          [0, 0, 0],
+          [0, 0, 'o'],
+        ]);
+      });
+    });
+
+    describe('.register', () => {
+      it('throws error without a function', () => {
+        expect(function () {
+          instance.register();
+        }).to.throwError();
+      });
+
+      it('callback passed to register is triggered by action', (done) => {
+        instance.register(done);
+        instance.action({
+          type: 'turn',
+          x: 1,
+          y: 1,
+          marker: 'x',
+        });
+      });
+
+      it('shouldnt fire if theres no action', (done) => {
+        instance.register(() => {
+          expect().to.fail();
+        });
+        setTimeout(done, 500);
       });
     });
   });
