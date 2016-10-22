@@ -22,11 +22,11 @@ class Store {
   }
 
   action (obj) {
-    const {turn, x, y, marker} = obj;
+    const {turn, x, y} = obj;
     this.gameboard = this.gameboard.map((row, yIndex) => {
       return row.map((square, xIndex) => {
         if (yIndex === y && xIndex === x && square === '') {
-          return marker;
+          return this.marker;
         }
         return square;
       });

@@ -42,7 +42,6 @@ describe('Store', () => {
           type: 'turn',
           x: 1,
           y: 1,
-          marker: 'x',
         })
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
@@ -57,14 +56,13 @@ describe('Store', () => {
           type: 'turn',
           x: 0,
           y: 2,
-          marker: 'o',
         });
 
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
           [0, 0, 0],
           [0, 0, 0],
-          ['o', 0, 0],
+          ['x', 0, 0],
         ]);
       });
 
@@ -73,21 +71,19 @@ describe('Store', () => {
           type: 'turn',
           x: 1,
           y: 0,
-          marker: 'o',
         });
 
         instance.action({
           type: 'turn',
           x: 2,
           y: 2,
-          marker: 'x',
         });
 
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
-          [0, 'o', 0],
+          [0, 'x', 0],
           [0, 0, 0],
-          [0, 0, 'x'],
+          [0, 0, 'o'],
         ]);
       });
 
@@ -97,20 +93,18 @@ describe('Store', () => {
           type: 'turn',
           x: 1,
           y: 1,
-          marker: 'o',
         });
 
         instance.action({
           type: 'turn',
           x: 1,
           y: 1,
-          marker: 'x',
         });
 
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
           [0, 0, 0],
-          [0, 'o', 0],
+          [0, 'x', 0],
           [0, 0, 0],
         ]);
       });
@@ -120,14 +114,12 @@ describe('Store', () => {
           type: 'turn',
           x: 1,
           y: 1,
-          marker: 'o',
         });
 
         instance.action({
           type: 'turn',
           x: 1,
           y: 1,
-          marker: 'x',
         });
 
         const actual = instance.getState('message');
@@ -162,14 +154,51 @@ describe('Store', () => {
 
     describe('.marker', () => {
       it('toggles between an x & an o', () => {
-        console.log('Marker', instance.marker)
         instance.action({
           type: 'turn',
           x: 2,
           y: 0,
-          marker: 'x',
         });
-        expect(instance.marker).to.be('o');
+
+        instance.action({
+          type: 'turn',
+          x: 2,
+          y: 2,
+        });
+
+        const actual = instance.getState('gameboard');
+        expect(actual).to.eql([
+          [0, 0, 'x'],
+          [0, 0, 0],
+          [0, 0, 'o'],
+        ]);
+      });
+
+      it('marker doesn\'t change when picking occupied square', () => {
+        instance.action({
+          type: 'turn',
+          x: 1,
+          y: 2,
+        });
+
+        instance.action({
+          type: 'turn',
+          x: 1,
+          y: 2,
+        });
+
+        instance.action({
+          type: 'turn',
+          x: 0,
+          y: 1,
+        });
+
+        const actual = instance.getState('gameboard');
+        expect(actual).to.eql([
+          [0, 0, 0],
+          ['o', 0, 0],
+          [0, 'x', 0],
+        ]);
       });
     });
   });
