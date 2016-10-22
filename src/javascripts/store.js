@@ -1,10 +1,11 @@
 class Store {
   constructor () {
-    const square = Array(3).fill('');
-    const gameboard = Array(3).fill(square);
+    const square = new Array(3).fill('');
+    const gameboard = new Array(3).fill(square);
     this.gameboard = gameboard;
     this.message = '';
     this.marker = 'o';
+    this.isValid = square === '' ? true : false;
   }
 
   getMarker () {
@@ -22,17 +23,24 @@ class Store {
   }
 
   action (obj) {
-    const {turn, x, y} = obj;
+    const {x, y} = obj;
     this.gameboard = this.gameboard.map((row, yIndex) => {
+
       return row.map((square, xIndex) => {
-        if (yIndex === y && xIndex === x && square === '') {
+        const targetSquare = (yIndex === y && xIndex === x);
+        const isEmpty = square == '';
+        if (targetSquare) {
+          if (!isEmpty) {
+            this.message = 'Pick an unoccupied square, hoser.';
+            return square;
+          }
           this.marker = this.marker === 'x' ? 'o' : 'x';
           return this.marker;
         }
         return square;
       });
     });
-    this.message = 'Pick an unoccupied square, hoser.';
+    console.log('MARKER', this.marker, this.gameboard);
     if (this.callback) {
       this.callback();
     }

@@ -44,7 +44,6 @@ export default class Board extends React.Component {
       type: 'turn',
       x,
       y,
-      marker: 'x',
     });
 
   }
