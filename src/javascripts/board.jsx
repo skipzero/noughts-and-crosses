@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Board extends React.Component {
+class Board extends React.Component {
   constructor (props) {
     super(props);
     props.store.register(this.updateState.bind(this));
@@ -19,7 +19,7 @@ export default class Board extends React.Component {
         const handleClick = this.clickHandler.bind(this, sqIndex, rowIndex);
         return (
           <div className='square' onClick={handleClick}>{square}</div>
-          )
+          );
       });
     });
   }
@@ -39,7 +39,6 @@ export default class Board extends React.Component {
   }
 
   clickHandler (x, y) {
-    console.log(arguments)
     this.props.store.action({
       type: 'turn',
       x,
@@ -135,4 +134,8 @@ export default class Board extends React.Component {
   }
 }
 
-module.export = Board;
+Board.propTypes = {
+  store: React.PropTypes.object,
+};
+
+export default Board;
