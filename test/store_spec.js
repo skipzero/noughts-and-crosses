@@ -143,6 +143,11 @@ describe('Store', () => {
         expect(actual).to.be('');
       });
 
+      it('displays winner message on winning condition, row', () => {
+        const actual = instance.getState('gameboard');
+
+      });
+
       it('marker doesn\'t change when picking occupied square', () => {
         instance.action({
           type: 'turn',
@@ -189,6 +194,11 @@ describe('Store', () => {
           [0, 0, 0],
           [0, 0, 'o'],
         ]);
+      });
+      describe('Winning', () => {
+        it('cant place mark after winning condition', () => {
+          expect().to.fail();
+        })
       });
     });
 
