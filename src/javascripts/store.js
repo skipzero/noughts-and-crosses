@@ -1,5 +1,5 @@
 class Store {
-  constructor () {
+  constructor (state = {}) {
     const square = new Array(3).fill('');
     const gameboard = new Array(3).fill(square);
     this.gameboard = gameboard;

@@ -33,7 +33,7 @@ describe('Store', () => {
       it('can return message', () => {
         const actual = instance.getState('message');
         expect(actual).to.eql('');
-      })
+      });
     });
 
     describe('.action', () => {
@@ -145,7 +145,6 @@ describe('Store', () => {
 
       it('displays winner message on winning condition, row', () => {
         const actual = instance.getState('gameboard');
-
       });
 
       it('marker doesn\'t change when picking occupied square', () => {
