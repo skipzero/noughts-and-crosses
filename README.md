@@ -1,4 +1,6 @@
 # Noughts and Crosses
+[![deps][dave-image]][dave-url]
+
 Noughts and Crosses (tic tac toe) with react.js
 
 ## About this game
@@ -28,3 +30,7 @@ to watch files run
 to run the game locally
 
     npm start
+
+
+[dave-image]: https://david-dm.org/zerosquadron/noughts-and-crosses.svg
+[dave-url]: http://github.com/zerosquadron/noughts-and-crosses
