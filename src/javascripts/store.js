@@ -1,3 +1,4 @@
+'use strict';
 class Store {
   constructor (state = {}) {
     const square = new Array(3).fill('');

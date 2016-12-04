@@ -1,3 +1,4 @@
+'use strict';
 const expect = require('expect.js');
 const Store = require('../src/javascripts/store');
 

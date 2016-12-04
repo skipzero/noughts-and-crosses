@@ -1,3 +1,4 @@
+'use strict';
 require('./stylesheets/main.scss');
 
 import React from 'react';
