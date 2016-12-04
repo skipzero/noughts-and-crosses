@@ -1,3 +1,5 @@
+'use strict';
+
 const expect = require('expect.js');
 const ai = require('../src/javascripts/ai');
 
