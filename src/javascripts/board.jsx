@@ -20,7 +20,7 @@ class Board extends React.Component {
         const handleClick = this.clickHandler.bind(this, sqIndex, rowIndex);
         return (
           <div className='square' onClick={handleClick}>{square}</div>
-          );
+        );
       });
     });
   }
@@ -45,7 +45,6 @@ class Board extends React.Component {
       x,
       y,
     });
-
   }
 
   // checkWin (index, turn) {

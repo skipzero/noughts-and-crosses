@@ -43,14 +43,14 @@ describe('Store', () => {
           type: 'turn',
           x: 1,
           y: 1,
-        })
+        });
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
           [0, 0, 0],
           [0, 'x', 0],
           [0, 0, 0],
         ]);
-      })
+      });
 
       it('first square last row is o', () => {
         instance.action({
@@ -176,6 +176,12 @@ describe('Store', () => {
       });
 
       it('marker toggles between an x & an o', () => {
+        instance = new Store([
+          ['','',''],
+          ['','',''],
+          ['','','o'],
+        ]);
+
         instance.action({
           type: 'turn',
           x: 2,
@@ -196,15 +202,32 @@ describe('Store', () => {
         ]);
       });
       describe('Winning', () => {
-        it('cant place mark after winning condition', () => {
-          expect().to.fail();
-        })
+        const board = [
+          ['','o','x'],
+          ['','o',''],
+          ['x','o',''],
+        ];
+
+        it('can not place marker after winning condition', () => {
+          instance = new Store(board);
+          instance.action({
+            type: 'turn',
+            x: 0,
+            y: 0,
+          });
+          const actual = instance.getState('gameboard');
+          expect(actual).to.eql([
+            ['','o','x'],
+            ['','o',''],
+            ['x','o',''],
+          ]);
+        });
       });
     });
 
     describe('.register', () => {
       it('throws error without a function', () => {
-        expect(function () {
+        expect(() => {
           instance.register();
         }).to.throwError();
       });
