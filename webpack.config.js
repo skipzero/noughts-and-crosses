@@ -3,11 +3,6 @@ const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const path = require('path');
 
-const PATH = {
-  app: path.resolve(__dirname, 'src/'),
-  build: path.resolve(__dirname, 'dist/'),
-}
-
 //  Was going to extract the css... but why for a simple game not going to 'Production'?
 // const extractSASS = new extractTextPlugin(`${PATH.build}/css/[name].scss`);
 // const extractCSS = new extractTextPlugin(`${PATH.build}/css/[name].css`);
@@ -21,9 +16,9 @@ const styleLoaders = [
 
 const config = {
   debug: true,
-  entry: [`${PATH.app}/index.js`],
+  entry: path.resolve(__dirname, '../src/index.js'),
   output: {
-    filename: `${PATH.build}/js/bundle.js`,
+    filename: path.resolve(__dirname, '../dist/js/bundle.js'),
   },
 
   devtool: 'source-map',

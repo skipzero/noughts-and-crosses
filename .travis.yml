@@ -2,7 +2,8 @@ language: node_js
 node_js:
   - "6.5"
 before_script:
-  - npm install -g node-gyp
   - npm run clean
 script: npm run build
+after_success:
+  - npm run coveralls
 sudo: false
