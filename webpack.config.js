@@ -16,9 +16,9 @@ const styleLoaders = [
 
 const config = {
   debug: true,
-  entry: path.resolve(__dirname, '../src/index.js'),
+  entry: path.resolve(__dirname, 'src/index.js'),
   output: {
-    filename: path.resolve(__dirname, '../dist/js/bundle.js'),
+    filename: path.resolve(__dirname, 'dist/js/bundle.js'),
   },
 
   devtool: 'source-map',

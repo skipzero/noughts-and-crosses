@@ -1,3 +1,4 @@
+/*eslint no-console: ['error', { allow: ['info', 'error'] }] */
 'use strict';
 class Store {
   constructor (state) {
@@ -52,7 +53,7 @@ class Store {
 
   isWinner (sq) {
     const row = this.gameboard[sq.y];
-    // console.log(sq, this.marker, row);
+    console.info(sq, this.marker, row);
   }
 
   register (callback) {
