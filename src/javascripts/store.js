@@ -53,7 +53,7 @@ class Store {
 
   isWinner (sq) {
     const row = this.gameboard[sq.y];
-    console.info(sq, this.marker, row);
+    // console.info(sq, this.marker, row);
   }
 
   register (callback) {

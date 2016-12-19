@@ -10,14 +10,18 @@
   "private": true,
   "scripts": {
     "test": "mocha",
-    "cover": "istanbul cover _mocha",
-    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "cover": "./node_modules/istanbul/lib/cli.js cover _mocha",
+    "coveralls": "./node_modules/istanbul/lib/cli.js cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "start": "./node_modules/.bin/webpack-dev-server -d --progress --colors --port 3000",
     "clean": "rm -rf node_modules dist",
     "build": "npm run clean && npm i && webpack -p",
     "dev": "webpack --progress --colors -d --watch",
     "server": "cd dist && http-server -p 3000",
     "lint": ""
+  },
+  "nyc": {
+    "sourceMap": false,
+    "instrument": false
   },
   "author": "skip mcbride",
   "license": "MIT",
@@ -32,6 +36,8 @@
   "devDependencies": {
     "autoprefixer": "^6.4.1",
     "babel-eslint": "^6.1.2",
+    "babel-plugin-istanbul": "^3.0.0",
+    "babel-register": "^6.18.0",
     "coveralls": "^2.11.15",
     "css-loader": "^0.23.0",
     "cssnano": "^3.7.5",
@@ -47,6 +53,7 @@
     "mocha": "^3.1.0",
     "mocha-lcov-reporter": "^1.2.0",
     "node-sass": "^3.2.0",
+    "nyc": "^10.0.0-candidate.2",
     "postcss-loader": "^0.8.0",
     "precss": "^1.4.0",
     "react": "^0.14.3",

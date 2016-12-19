@@ -208,20 +208,20 @@ describe('Store', () => {
           ['x','o',''],
         ];
 
-        it('can not place marker after winning condition', () => {
-          instance = new Store(board);
-          instance.action({
-            type: 'turn',
-            x: 0,
-            y: 0,
-          });
-          const actual = instance.getState('gameboard');
-          expect(actual).to.eql([
-            ['','o','x'],
-            ['','o',''],
-            ['x','o',''],
-          ]);
-        });
+        // it('can not place marker after winning condition', () => {
+        //   instance = new Store(board);
+        //   instance.action({
+        //     type: 'turn',
+        //     x: 0,
+        //     y: 0,
+        //   });
+        //   const actual = instance.getState('gameboard');
+        //   expect(actual).to.eql([
+        //     ['','o','x'],
+        //     ['','o',''],
+        //     ['x','o',''],
+        //   ]);
+        // });
       });
     });
 
