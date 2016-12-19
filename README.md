@@ -1,6 +1,6 @@
 # Noughts and Crosses
 [![deps][dave-image]][dave-url]
-[![Coverage Status](https://coveralls.io/repos/github/zerosquadron/noughts-and-crosses/badge.svg?branch=master)](https://coveralls.io/github/zerosquadron/noughts-and-crosses?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/zerosquadron/noughts-and-crosses/badge.svg?branch=master)](https://coveralls.io/github/zerosquadron/noughts-and-crosses?branch=master) [![Build Status](https://travis-ci.org/zerosquadron/noughts-and-crosses.svg?branch=master)](https://travis-ci.org/zerosquadron/noughts-and-crosses)
 
 Noughts and Crosses (tic tac toe) with react.js
 
