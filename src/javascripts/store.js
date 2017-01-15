@@ -1,4 +1,4 @@
-/*eslint no-console: ['error', { allow: ['info', 'error'] }] */
+/*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
 'use strict';
 class Store {
   constructor (state) {
@@ -38,8 +38,8 @@ class Store {
           }
 
           // put win check here...
-          this.isWinner(obj);
           this.marker = this.marker === 'x' ? 'o' : 'x';
+          this.isWinner(obj);
           return this.marker;
         }
         return square;
@@ -53,7 +53,19 @@ class Store {
 
   isWinner (sq) {
     const row = this.gameboard[sq.y];
-    console.info(sq, this.marker, row);
+    // const winArray = [
+    //   [0, 1, 2],
+    //   [0, 3, 6],
+    //   [0, 4, 8],
+    //   [1, 4, 7],
+    //   [2, 5, 8],
+    //   [2, 4, 6],
+    //   [3, 4, 5],
+    //   [6, 7, 8],
+    // ];
+    // debugger;
+    console.log('Mrk', this.marker, row);
+
   }
 
   register (callback) {

@@ -48,13 +48,13 @@ const config = {
         loaders: styleLoaders,  //   extractSASS.extract('style', 'css?sourceMap', 'resolve-url', 'sass?sourceMap'),
       },
 
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          'url?limit=8192',
-          'img',
-        ],
-      },
+      // {
+      //   test: /\.(jpe?g|png|gif|svg)$/i,
+      //   loaders: [
+      //     'url?limit=8192',
+      //     'img',
+      //   ],
+      // },
 
       {
         test: /\.jsx*?$/,

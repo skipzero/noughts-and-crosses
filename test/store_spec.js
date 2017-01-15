@@ -205,9 +205,8 @@ describe('Store', () => {
         const board = [
           ['','o','x'],
           ['','o',''],
-          ['x','o',''],
+          ['x','o','x'],
         ];
-
         it('can not place marker after winning condition', () => {
           instance = new Store(board);
           instance.action({
@@ -215,12 +214,24 @@ describe('Store', () => {
             x: 0,
             y: 0,
           });
+
           const actual = instance.getState('gameboard');
           expect(actual).to.eql([
             ['','o','x'],
             ['','o',''],
-            ['x','o',''],
+            ['x','o','x'],
           ]);
+        });
+
+        it('checks a row for win', () => {
+          instance = new Store([
+            ['o','o','x'],
+            ['x','o','o'],
+            ['x','x','x'],
+          ]);
+
+          const actual = false;
+          expect(actual).to.eql(true);
         });
       });
     });
