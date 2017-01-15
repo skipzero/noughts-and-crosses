@@ -1,7 +1,7 @@
 # Noughts and Crosses
 [![deps][dave-image]][dave-url]
 [![Coverage Status][cover-img]][cover-url]
-[![Build Status][build-img]][build-url]
+[![Build Status](https://travis-ci.org/skipzero/noughts-and-crosses.svg?branch=master)](https://travis-ci.org/skipzero/noughts-and-crosses)
 
 Noughts and Crosses (tic tac toe) with react.js
 
@@ -39,5 +39,3 @@ to run the game locally
 
 [cover-img]: https://coveralls.io/repos/github/zerosquadron/noughts-and-crosses/badge.svg?branch=master
 [cover-url]: https://coveralls.io/github/zerosquadron/noughts-and-crosses?branch=master
-[build-img]: https://travis-ci.org/zerosquadron/noughts-and-crosses.svg?branch=master
-[build-url]: https://travis-ci.org/zerosquadron/noughts-and-crosses
