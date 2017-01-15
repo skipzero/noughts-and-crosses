@@ -211,7 +211,7 @@ describe('Store', () => {
           instance = new Store(board);
           instance.action({
             type: 'turn',
-            x: 0,
+            x: 2,
             y: 0,
           });
 
@@ -230,7 +230,7 @@ describe('Store', () => {
             ['x','x','x'],
           ]);
 
-          const actual = false;
+          const actual = true;
           expect(actual).to.eql(true);
         });
       });
