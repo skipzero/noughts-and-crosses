@@ -11,12 +11,10 @@
   "scripts": {
     "test": "mocha",
     "cover": "./node_modules/istanbul/lib/cli.js cover _mocha",
-    "coveralls": "./node_modules/istanbul/lib/cli.js cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "start": "./node_modules/.bin/webpack-dev-server -d --progress --colors --port 3000",
     "clean": "rm -rf node_modules dist",
     "build": "npm run clean && npm i && webpack -p",
     "dev": "webpack --progress --colors -d --watch",
-    "server": "cd dist && http-server -p 3000",
     "lint": ""
   },
   "nyc": {
@@ -66,7 +64,6 @@
     "svgo-loader": "^1.1.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.13.2",
-    "webpack-dashboard": "^0.2.1",
     "webpack-dev-server": "^1.16.1"
   }
 }

@@ -1,5 +1,4 @@
 // const extractTextPlugin = require('extract-text-webpack-plugin');
-const Dashboard = require('webpack-dashboard');
 const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const path = require('path');
@@ -74,7 +73,6 @@ const config = {
       failOnError: false,
   },
   plugins: [
-    new Dashboard(),
     // extractSASS,
     // extractCSS,
   ]
