@@ -10,6 +10,8 @@ class Store {
       this.gameboard = state;
     }
 
+    this.end = false;
+
     this.message = '';
     this.marker = 'o';
   }
@@ -38,9 +40,12 @@ class Store {
           }
 
           // put win check here...
-          this.marker = this.marker === 'x' ? 'o' : 'x';
-          this.isWinner(obj);
-          return this.marker;
+          if (!this.end) {
+            this.marker = this.marker === 'x' ? 'o' : 'x';
+            this.isWinner(obj);
+            return this.marker;
+          }
+          return null;
         }
         return square;
       });
@@ -51,27 +56,37 @@ class Store {
     }
   }
 
-  isWinner (sq) {
-    const row = this.gameboard[sq.y];
-    // const winArray = [
-    //   [0, 1, 2],
-    //   [0, 3, 6],
-    //   [0, 4, 8],
-    //   [1, 4, 7],
-    //   [2, 5, 8],
-    //   [2, 4, 6],
-    //   [3, 4, 5],
-    //   [6, 7, 8],
-    // ];
-    // debugger;
-    console.log('Mrk', this.marker, row);
+  isWinner (obj) {
+    const row = this.gameboard[obj.y];
+    const col = obj.x;
 
+    row[obj.x] = this.marker;
+
+    let target = [];
+console.log(this.gameboard)
+    let checkCol = this.gameboard.reduce((acc, cur) => {
+      console.log(`column... ${acc}`);
+    });
+
+    let rowWin = row.reduce((thisVal, next, index) => {
+      if (next === '') {
+        return null;
+      }
+
+      console.log(thisVal, next, index)
+    });
+
+    if (rowWin === true) {
+      console.log('Winner')
+      this.end = true;
+    }
   }
 
   register (callback) {
     if (!callback) {
       throw new Error('onChange needs a callback');
     }
+
     this.callback = callback;
   }
 }

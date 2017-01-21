@@ -25,9 +25,9 @@ describe('Store', () => {
       it('can return gameboard state', () => {
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
-          [0, 0, 0],
-          [0, 0, 0],
-          [0, 0, 0],
+          ['', '', ''],
+          ['', '', ''],
+          ['', '', ''],
         ]);
       });
 
@@ -46,9 +46,9 @@ describe('Store', () => {
         });
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
-          [0, 0, 0],
-          [0, 'x', 0],
-          [0, 0, 0],
+          ['', '', ''],
+          ['', 'x', ''],
+          ['', '', ''],
         ]);
       });
 
@@ -61,9 +61,9 @@ describe('Store', () => {
 
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
-          [0, 0, 0],
-          [0, 0, 0],
-          ['x', 0, 0],
+          ['', '', ''],
+          ['', '', ''],
+          ['x', '', ''],
         ]);
       });
 
@@ -82,9 +82,9 @@ describe('Store', () => {
 
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
-          [0, 'x', 0],
-          [0, 0, 0],
-          [0, 0, 'o'],
+          ['', 'x', ''],
+          ['', '', ''],
+          ['', '', 'o'],
         ]);
       });
 
@@ -104,9 +104,9 @@ describe('Store', () => {
 
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
-          [0, 0, 0],
-          [0, 'x', 0],
-          [0, 0, 0],
+          ['', '', ''],
+          ['', 'x', ''],
+          ['', '', ''],
         ]);
       });
 
@@ -169,17 +169,17 @@ describe('Store', () => {
 
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
-          [0, 0, 0],
-          ['o', 0, 0],
-          [0, 'x', 0],
+          ['', '', ''],
+          ['o', '', ''],
+          ['', 'x', ''],
         ]);
       });
 
       it('marker toggles between an x & an o', () => {
         instance = new Store([
-          ['','',''],
-          ['','',''],
-          ['','','o'],
+          ['', '' ,''],
+          ['', '', ''],
+          ['', '', 'o'],
         ]);
 
         instance.action({
@@ -196,16 +196,16 @@ describe('Store', () => {
 
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
-          [0, 0, 'x'],
-          [0, 0, 0],
-          [0, 0, 'o'],
+          ['', '', 'x'],
+          ['', '', ''],
+          ['', '', 'o'],
         ]);
       });
       describe('Winning', () => {
         const board = [
-          ['','o','x'],
-          ['','o',''],
-          ['x','o','x'],
+          ['', 'o', 'x'],
+          ['', 'o', ''],
+          ['x', 'o', 'x'],
         ];
         it('can not place marker after winning condition', () => {
           instance = new Store(board);
@@ -217,17 +217,17 @@ describe('Store', () => {
 
           const actual = instance.getState('gameboard');
           expect(actual).to.eql([
-            ['','o','x'],
-            ['','o',''],
-            ['x','o','x'],
+            ['', 'o', 'x'],
+            ['', 'o', ''],
+            ['x', 'o', 'x'],
           ]);
         });
 
         it('checks a row for win', () => {
           instance = new Store([
-            ['o','o','x'],
-            ['x','o','o'],
-            ['x','x','x'],
+            ['o', 'o', 'x'],
+            ['x', 'o', 'o'],
+            ['x', 'x', 'x'],
           ]);
 
           const actual = false;
