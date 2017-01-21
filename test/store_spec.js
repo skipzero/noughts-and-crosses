@@ -39,6 +39,7 @@ describe('Store', () => {
 
     describe('.action', () => {
       it('center square is x', () => {
+
         instance.action({
           type: 'turn',
           x: 1,
