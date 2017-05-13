@@ -61,10 +61,10 @@ class Store {
     const col = obj.x;
 
     // row[obj.x] = this.marker;
-console.log(obj)
+// console.log(obj);
     let target = [];
     let checkCol = this.gameboard.reduce((acc, cur, index) => {
-      console.log(`column... ${cur} ${index}`);
+      return console.log(`column... ${cur} ${index}`);
     });
 
     let rowWin = row.reduce((thisVal, next, index) => {
@@ -72,11 +72,11 @@ console.log(obj)
         return null;
       }
 
-      console.log(thisVal, next, index)
+      console.log(thisVal, next, index);
     });
 
     if (rowWin === true) {
-      console.log('Winner')
+      console.log('Winner');
       this.end = true;
     }
   }
