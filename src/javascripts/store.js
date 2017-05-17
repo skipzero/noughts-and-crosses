@@ -58,14 +58,14 @@ class Store {
 
   isWinner (obj) {
     const row = this.gameboard[obj.y];
-    const col = obj.x;
+    // const col = obj.x;
 
     // row[obj.x] = this.marker;
 // console.log(obj);
-    let target = [];
-    let checkCol = this.gameboard.reduce((acc, cur, index) => {
-      return console.log(`column... ${cur} ${index}`);
-    });
+    // let target = [];
+    // let checkCol = this.gameboard.reduce((acc, cur, index) => {
+    //   return console.log(`column... ${cur} ${index}`);
+    // });
 
     let rowWin = row.reduce((thisVal, next, index) => {
       if (next === '') {
@@ -73,6 +73,7 @@ class Store {
       }
 
       console.log(thisVal, next, index);
+      return thisVal;
     });
 
     if (rowWin === true) {
