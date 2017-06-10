@@ -61,7 +61,7 @@ class Store {
     // const col = obj.x;
 
     // row[obj.x] = this.marker;
-// console.log(obj);
+    // console.log(obj);
     // let target = [];
     // let checkCol = this.gameboard.reduce((acc, cur, index) => {
     //   return console.log(`column... ${cur} ${index}`);
