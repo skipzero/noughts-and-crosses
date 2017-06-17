@@ -46,6 +46,7 @@ class Board extends React.Component {
       y,
     });
   }
+}
 
 Board.propTypes = {
   store: React.PropTypes.object,
