@@ -13,7 +13,7 @@ class Store {
     this.end = false;
 
     this.message = '';
-    this.marker = 'o';
+    this.marker = 'x';
   }
 
   getState (id) {

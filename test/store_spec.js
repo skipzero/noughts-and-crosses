@@ -38,7 +38,7 @@ describe('Store', () => {
     });
 
     describe('.action', () => {
-      it('center square is x', () => {
+      it('center square is o', () => {
 
         instance.action({
           type: 'turn',
@@ -48,7 +48,7 @@ describe('Store', () => {
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
           ['', '', ''],
-          ['', 'x', ''],
+          ['', 'o', ''],
           ['', '', ''],
         ]);
       });
