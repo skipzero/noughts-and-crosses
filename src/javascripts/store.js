@@ -10,7 +10,7 @@ class Store {
       this.gameboard = state;
     }
 
-    this.end = false;
+    this.winner = false;
 
     this.message = '';
     this.marker = 'x';
@@ -28,13 +28,28 @@ class Store {
 
   action (obj) {
     const {x, y} = obj;
+    if (this.winner) {
+      console.log(`we have a winner. congrats ${this.marker}`);
+      return;
+    }
     this.gameboard = this.gameboard.map((row, yIndex) => {
       return row.map((square, xIndex) => {
         const targetSquare = (yIndex === y && xIndex === x);
         const isEmpty = square === '';
 
+        const getWin = this.gameboard[y].every((winningSquare) => {
+          console.log('WinningSquare');
+          console.log(winningSquare);
+          const myMarker = this.gameboard[y][x];
+          return myMarker === winningSquare;
+        });
+
+        if (getWin) {
+          this.winner = true;
+        }
+
         if (targetSquare) {
-          if (!isEmpty) {
+          if (!isEmpty && !this.winner) {
             this.message = 'Pick an unoccupied square, hoser.';
             return square;
           }
@@ -58,14 +73,7 @@ class Store {
 
   isWinner (obj) {
     const row = this.gameboard[obj.y];
-    // const col = obj.x;
 
-    // row[obj.x] = this.marker;
-    // console.log(obj);
-    // let target = [];
-    // let checkCol = this.gameboard.reduce((acc, cur, index) => {
-    //   return console.log(`column... ${cur} ${index}`);
-    // });
 
     let rowWin = row.reduce((thisVal, next, index) => {
       if (next === '') {
