@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Board extends React.Component {
   constructor (props) {
@@ -49,7 +50,7 @@ class Board extends React.Component {
 }
 
 Board.propTypes = {
-  store: React.PropTypes.object,
+  store: PropTypes.object,
 };
 
-export default Board;
+exports.module = Board;
