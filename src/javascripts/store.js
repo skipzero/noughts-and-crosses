@@ -10,74 +10,62 @@ class Store {
       this.gameboard = state;
     }
 
-    this.end = false;
-
-    this.message = '';
-    this.marker = 'o';
+    this.state = {
+      end: false,
+      message: '',
+      marker: 'x',
+    };
   }
 
   getState (id) {
     if (id === 'gameboard') {
       return this.gameboard;
     }
+
     if (id === 'message') {
       return this.message;
     }
+
     return id;
   }
 
-  action (obj) {
+  setSquare (obj) {
     const {x, y} = obj;
-    this.gameboard = this.gameboard.map((row, yIndex) => {
-      return row.map((square, xIndex) => {
-        const targetSquare = (yIndex === y && xIndex === x);
-        const isEmpty = square === '';
+    console.log(this);
+    let square = this.gameboard[y][x];
 
-        if (targetSquare) {
-          if (!isEmpty) {
-            this.message = 'Pick an unoccupied square, hoser.';
-            return square;
-          }
+    const isEmpty = square === '';
 
-          // put win check here...
-          if (!this.end) {
-            this.marker = this.marker === 'x' ? 'o' : 'x';
-            this.isWinner(obj);
-            return this.marker;
-          }
-          return null;
-        }
-        return square;
-      });
-    });
+    if (isEmpty) {
+      square = this.state.marker;
+      this.gameboard[y][x] = square;
+    }
+
+    // this.gameboard = this.gameboard.map((row, yIndex) => {
+    //   return row.map((square, xIndex) => {
+    //     const targetSquare = (yIndex === y && xIndex === x);
+    //     const isEmpty = square === '';
+    //
+    //     if (targetSquare) {
+    //       if (!isEmpty) {
+    //         this.message = 'Pick an unoccupied square, hoser.';
+    //         return square;
+    //       }
+    //
+    //       // put win check here...
+    //       if (!this.end) {
+    //         this.marker = this.marker === 'x' ? 'o' : 'x';
+    //         this.isWinner(obj);
+    //         return this.marker;
+    //       }
+    //       return null;
+    //     }
+    //     return square;
+    //   });
+    // });
 
     if (this.callback) {
       this.callback();
-    }
-  }
-
-  isWinner (obj) {
-    const row = this.gameboard[obj.y];
-    const col = obj.x;
-
-    // row[obj.x] = this.marker;
-console.log(obj)
-    let target = [];
-    let checkCol = this.gameboard.reduce((acc, cur, index) => {
-      console.log(`column... ${cur} ${index}`);
-    });
-
-    let rowWin = row.reduce((thisVal, next, index) => {
-      if (next === '') {
-        return null;
-      }
-
-      console.log(thisVal, next, index)
-    });
-
-    if (rowWin === true) {
-      console.log('Winner')
-      this.end = true;
     }
   }
 

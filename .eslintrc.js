@@ -15,6 +15,7 @@ module.exports = {
     //
     // Best Practices
     //
+    'no-console': 1,
     // get/set must be defined in pairs.
     'accessor-pairs': 2,
     // catch forgotten returns in array methods like map/reduce.

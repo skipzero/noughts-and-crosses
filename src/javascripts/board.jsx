@@ -1,10 +1,13 @@
 'use strict';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Board extends React.Component {
   constructor (props) {
     super(props);
-    props.store.register(this.updateState.bind(this));
+    console.log(this.props);
+
+    this.updateState = this.updateState.bind(this);
   }
 
   updateState () {
@@ -19,18 +22,19 @@ class Board extends React.Component {
       return row.map((square, sqIndex) => {
         const handleClick = this.clickHandler.bind(this, sqIndex, rowIndex);
         return (
-          <div className='square' onClick={handleClick}>{square}</div>
+          <div className='square' onClick={handleClick}>
+            {square}
+          </div>
         );
       });
     });
   }
 
   render () {
-    const store = this.props.store;
     const gameboard = this.gameBoard();
     return (
       <div>
-        <div id='messages'>{store.getState('message')}</div>
+        <div id='messages'>{this.props.store.getState('message')}</div>
           <div id='gameBoard'>
             {gameboard}
           </div>
@@ -40,7 +44,7 @@ class Board extends React.Component {
   }
 
   clickHandler (x, y) {
-    this.props.store.action({
+    this.props.store.setSquare({
       type: 'turn',
       x,
       y,
@@ -49,7 +53,10 @@ class Board extends React.Component {
 }
 
 Board.propTypes = {
-  store: React.PropTypes.object,
+  store: PropTypes.object,
+  getState: PropTypes.func,
+  setSquare: PropTypes.func,
+  register: PropTypes.func,
 };
 
 export default Board;
