@@ -2,9 +2,9 @@
 'use strict';
 class Store {
   constructor (state) {
-    const square = new Array(3).fill('');
-    const gameboard = new Array(3).fill(square);
-    this.gameboard = gameboard;
+    this.gameboard = [['','',''],
+                     ['','',''],
+                     ['','','']];
 
     if (state) {
       this.gameboard = state;
@@ -41,6 +41,13 @@ class Store {
       this.gameboard[y][x] = square;
     }
 
+    // this.gameboard = this.gameboard.map((row, rowIdx) => {
+    //   if (rowIdx)
+    //   return row.map((sq, sqIdx) => {
+    //     console.log(sq, x, sqIdx)
+    //     return sq;
+    //   });
+    // });
     // this.gameboard = this.gameboard.map((row, yIndex) => {
     //   return row.map((square, xIndex) => {
     //     const targetSquare = (yIndex === y && xIndex === x);
@@ -67,6 +74,7 @@ class Store {
     if (this.callback) {
       this.callback();
     }
+    console.log(this.gameboard);
   }
 
   register (callback) {

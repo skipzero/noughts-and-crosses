@@ -7,7 +7,7 @@ class Board extends React.Component {
     super(props);
     console.log(this.props);
 
-    this.updateState = this.updateState.bind(this);
+    props.store.register(this.updateState.bind(this));
   }
 
   updateState () {
