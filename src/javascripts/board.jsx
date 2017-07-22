@@ -44,7 +44,7 @@ class Board extends React.Component {
   }
 
   clickHandler (x, y) {
-    this.props.store.setSquare({
+    this.props.store.action({
       type: 'turn',
       x,
       y,

@@ -29,7 +29,7 @@ class Store {
     return id;
   }
 
-  setSquare (obj) {
+  action (obj) {
     const {x, y} = obj;
     let marker = this.state.marker;
     console.log(this);

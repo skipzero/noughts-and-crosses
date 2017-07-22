@@ -5,7 +5,8 @@ module.exports = {
     browser: true,
     // Allows module/require syntax
     node: true,
-    es6: true
+    es6: true,
+    mocha: true,
   },
   globals: {
 

@@ -9,7 +9,7 @@ describe('Store', () => {
   it('return an object', () => {
     const actual = new Store();
     expect(actual).to.be.an('object');
-  })
+  });
 
   describe('instance', () => {
     let instance;
