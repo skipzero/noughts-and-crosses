@@ -31,6 +31,7 @@ class Store {
 
   setSquare (obj) {
     const {x, y} = obj;
+    let marker = this.state.marker;
     console.log(this);
     let square = this.gameboard[y][x];
 
@@ -41,35 +42,8 @@ class Store {
       this.gameboard[y][x] = square;
     }
 
-    // this.gameboard = this.gameboard.map((row, rowIdx) => {
-    //   if (rowIdx)
-    //   return row.map((sq, sqIdx) => {
-    //     console.log(sq, x, sqIdx)
-    //     return sq;
-    //   });
-    // });
-    // this.gameboard = this.gameboard.map((row, yIndex) => {
-    //   return row.map((square, xIndex) => {
-    //     const targetSquare = (yIndex === y && xIndex === x);
-    //     const isEmpty = square === '';
-    //
-    //     if (targetSquare) {
-    //       if (!isEmpty) {
-    //         this.message = 'Pick an unoccupied square, hoser.';
-    //         return square;
-    //       }
-    //
-    //       // put win check here...
-    //       if (!this.end) {
-    //         this.marker = this.marker === 'x' ? 'o' : 'x';
-    //         this.isWinner(obj);
-    //         return this.marker;
-    //       }
-    //       return null;
-    //     }
-    //     return square;
-    //   });
-    // });
+    this.state.marker = marker === 'x' ? 'o' : 'x';
+
 
     if (this.callback) {
       this.callback();
