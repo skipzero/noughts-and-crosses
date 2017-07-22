@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 class Board extends React.Component {
   constructor (props) {
     super(props);
-    console.log(this.props);
 
     props.store.register(this.updateState.bind(this));
   }

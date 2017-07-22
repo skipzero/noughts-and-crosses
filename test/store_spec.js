@@ -6,6 +6,7 @@ describe('Store', () => {
   it('is a function', () => {
     expect(Store).to.be.a('function');
   });
+
   it('return an object', () => {
     const actual = new Store();
     expect(actual).to.be.an('object');
@@ -147,6 +148,7 @@ describe('Store', () => {
 
       it('displays winner message on winning condition, row', () => {
         const actual = instance.getState('gameboard');
+        // expect(actual).to.be(!actual);
       });
 
       it('marker doesn\'t change when picking occupied square', () => {
@@ -202,12 +204,14 @@ describe('Store', () => {
           ['', '', 'o'],
         ]);
       });
+
       describe('Winning', () => {
         const board = [
           ['', 'o', 'x'],
           ['', 'o', ''],
           ['x', 'o', 'x'],
         ];
+
         it('can not place marker after winning condition', () => {
           instance = new Store(board);
           instance.action({

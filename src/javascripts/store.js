@@ -23,7 +23,7 @@ class Store {
     }
 
     if (id === 'message') {
-      return this.message;
+      return this.state.message;
     }
 
     return id;
@@ -32,23 +32,24 @@ class Store {
   action (obj) {
     const {x, y} = obj;
     let marker = this.state.marker;
-    console.log(this);
+    // console.log(this);
     let square = this.gameboard[y][x];
 
     const isEmpty = square === '';
 
-    if (isEmpty) {
-      square = this.state.marker;
-      this.gameboard[y][x] = square;
+    if (!isEmpty) {
+      this.state.message = 'Pick an unoccupied square, hoser.';
+      return;
     }
 
+    square = this.state.marker;
+    this.gameboard[y][x] = square;
     this.state.marker = marker === 'x' ? 'o' : 'x';
-
 
     if (this.callback) {
       this.callback();
     }
-    console.log(this.gameboard);
+    // console.log(this.gameboard);
   }
 
   register (callback) {
