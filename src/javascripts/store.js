@@ -11,7 +11,7 @@ class Store {
     }
 
     this.state = {
-      end: false,
+      gameOver: false,
       message: '',
       marker: 'x',
     };
@@ -31,8 +31,13 @@ class Store {
 
   action (obj) {
     const {x, y} = obj;
+    const gameEnded = this.state.gameOver;
+
+    if (gameEnded) {
+      return;
+    }
+
     let marker = this.state.marker;
-    // console.log(this);
     let square = this.gameboard[y][x];
 
     const isEmpty = square === '';
@@ -44,12 +49,64 @@ class Store {
 
     square = this.state.marker;
     this.gameboard[y][x] = square;
+
+    const gameOver = this.isWinner(this.gameboard);
+
+    if (gameOver) {
+      this.state.message = `Good Job ${(this.state.marker).toUpperCase()}'s. U win.`;
+      this.state.gameOver = gameOver;
+      // return;
+    }
+
+    this.state.gameOver = gameOver;
+
     this.state.marker = marker === 'x' ? 'o' : 'x';
 
     if (this.callback) {
       this.callback();
     }
-    // console.log(this.gameboard);
+  }
+
+  isWinner (newBoard) {
+
+    let boardCheck = newBoard.some((row) => {
+      return this.rowCheck(row); // check our rows first as they're the easiest
+    });
+
+    console.log('newBoard');
+    console.log(boardCheck);
+
+    if (!boardCheck) {
+      boardCheck = this.rowCheck(this.rotateBoard(newBoard)); // Rotate board to check the verticals
+    }
+    return boardCheck;
+  }
+
+  rowCheck (row) {
+    const matchingRow = row.every((square) => {
+
+      return square === this.state.marker;
+    });
+
+    return matchingRow;
+  }
+
+  crossCheck (crossBoard) {
+    const diagonal = crossBoard.map((crossRow, index) => {
+      return crossRow[index];
+    });
+    return diagonal;
+  }
+
+  rotateBoard (board) {
+
+    const rotatedBoard = board[0].map((item, col) => {
+      return board.map((row) => {
+        return row[col];
+      }).reverse();
+    });
+
+    return rotatedBoard;
   }
 
   register (callback) {

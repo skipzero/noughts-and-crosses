@@ -146,9 +146,38 @@ describe('Store', () => {
         expect(actual).to.be('');
       });
 
-      it('displays winner message on winning condition, row', () => {
-        const actual = instance.getState('gameboard');
-        // expect(actual).to.be(!actual);
+      it('returns true for winning condition', () => {
+        let game = new Store([
+          ['x','x',''],
+          ['o','o',''],
+          ['','',''],
+        ]);
+
+        game.action({
+          type: 'turn',
+          y: 0,
+          x: 2,
+        });
+        expect(game.state.gameOver).to.eql(true);
+      });
+
+      it ('winning message displays', () => {
+        let game = new Store([
+          ['x','x',''],
+          ['o','o',''],
+          ['','',''],
+        ]);
+
+        game.action({
+          type: 'turn',
+          y: 0,
+          x: 2,
+        });
+
+
+        const actual = game.getState('message');
+        expect(actual).to.be(`Good Job X\'s. U win.`);
+        // expect(actual).to.be(`Good Job ${(game.state.marker).toUpperCase()}'s. U win.`);
       });
 
       it('marker doesn\'t change when picking occupied square', () => {
