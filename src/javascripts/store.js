@@ -33,7 +33,7 @@ class Store {
     const {x, y} = obj;
     const gameEnded = this.state.gameOver;
 
-    if (gameEnded) {
+    if (gameEnded) { // return out if we've got a winner
       return;
     }
 
@@ -73,12 +73,39 @@ class Store {
       return this.rowCheck(row); // check our rows first as they're the easiest
     });
 
-    console.log('newBoard');
+    console.log('Board checker');
+    console.log(boardCheck);
+    if (boardCheck) {
+      return boardCheck;
+    }
+    const diagonalArray = this.crossCheck(newBoard);
+
+    boardCheck = this.rowCheck(diagonalArray);
+debugger;
+    if (!boardCheck) {
+      // debugger;
+      newBoard = this.rotateBoard(newBoard); //Rotate board turning columns to rows
+
+      boardCheck = newBoard.some((row) => { //Check the row (columns)
+        return this.rowCheck(row);
+      });
+
+      console.log('Rotated');
+      console.log(newBoard);
+      return boardCheck;
+    }
+    if (!boardCheck) {
+      // debugger;
+      newBoard = this.rotateBoard(newBoard); //Rotate board turning columns to rows
+
+      const reverseDiagonalArray = this.crossCheck(newBoard);
+      boardCheck = this.rowCheck(reverseDiagonalArray);
+      console.log('Rotated Diagonal...');
+      console.log(newBoard);
+      return boardCheck;
+    }
     console.log(boardCheck);
 
-    if (!boardCheck) {
-      boardCheck = this.rowCheck(this.rotateBoard(newBoard)); // Rotate board to check the verticals
-    }
     return boardCheck;
   }
 
@@ -95,6 +122,8 @@ class Store {
     const diagonal = crossBoard.map((crossRow, index) => {
       return crossRow[index];
     });
+    console.log('diagonal checker');
+    console.log(diagonal);
     return diagonal;
   }
 

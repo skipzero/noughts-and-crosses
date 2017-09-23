@@ -176,8 +176,10 @@ describe('Store', () => {
 
 
         const actual = game.getState('message');
-        expect(actual).to.be(`Good Job X\'s. U win.`);
+        expect(actual).to.be(`Good Job ${game}'s. U win.`);
         // expect(actual).to.be(`Good Job ${(game.state.marker).toUpperCase()}'s. U win.`);
+        console.log('game')
+        console.log(game)
       });
 
       it('marker doesn\'t change when picking occupied square', () => {
