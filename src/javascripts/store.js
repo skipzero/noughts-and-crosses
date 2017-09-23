@@ -81,7 +81,6 @@ class Store {
     const diagonalArray = this.crossCheck(newBoard);
 
     boardCheck = this.rowCheck(diagonalArray);
-debugger;
     if (!boardCheck) {
       // debugger;
       newBoard = this.rotateBoard(newBoard); //Rotate board turning columns to rows

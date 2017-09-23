@@ -176,7 +176,7 @@ describe('Store', () => {
 
 
         const actual = game.getState('message');
-        expect(actual).to.be(`Good Job ${game}'s. U win.`);
+        expect(actual).to.be(game.state.message);
         // expect(actual).to.be(`Good Job ${(game.state.marker).toUpperCase()}'s. U win.`);
         console.log('game')
         console.log(game)
