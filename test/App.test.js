@@ -232,7 +232,7 @@ describe('Store', () => {
           ]);
 
           const actual = true;
-          expect(actual).to.eql();
+          expect(actual).to.eql(instance.winner);
         });
       });
     });

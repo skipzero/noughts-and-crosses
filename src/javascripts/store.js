@@ -1,5 +1,4 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
-'use strict';
 class Store {
   constructor (state) {
     const square = new Array(3).fill('');
@@ -28,6 +27,7 @@ class Store {
 
   action (obj) {
     const {x, y} = obj;
+
     if (this.winner) {
       console.log(`we have a winner. congrats ${this.marker}`);
       return;
@@ -36,17 +36,17 @@ class Store {
       return row.map((square, xIndex) => {
         const targetSquare = (yIndex === y && xIndex === x);
         const isEmpty = square === '';
+console.log(this.gameboard[y])
+        // const getWin = this.gameboard[y].every((winningSquare) => {
+        //   console.log('WinningSquare');
+        //   console.log(winningSquare);
+        //   const myMarker = this.gameboard[y][x];
+        //   return myMarker === winningSquare;
+        // });
 
-        const getWin = this.gameboard[y].every((winningSquare) => {
-          console.log('WinningSquare');
-          console.log(winningSquare);
-          const myMarker = this.gameboard[y][x];
-          return myMarker === winningSquare;
-        });
-
-        if (getWin) {
-          this.winner = true;
-        }
+        // if (getWin) {
+        //   this.winner = true;
+        // }
 
         if (targetSquare) {
           if (!isEmpty && !this.winner) {
@@ -71,19 +71,22 @@ class Store {
     }
   }
 
-  isWinner (obj) {
-    const row = this.gameboard[obj.y];
-
-
-    let rowWin = row.reduce((thisVal, next, index) => {
-      if (next === '') {
-        return null;
+  isWinner ({x, y}) {
+    console.log('is Winner::', x, y)
+    const row = this.gameboard[y].map((curr, index) => {
+      if (index === x) {
+        curr = this.marker;
       }
-
-      console.log(thisVal, next, index);
-      return thisVal;
+      return curr;
     });
-
+console.log('our row', row)
+    const rowWin = row.filter((curr, index) => {
+      if (row[index + 1] && curr === row[index + 1]) {
+        return true;
+      }
+      return false;
+    });
+console.log(rowWin)
     if (rowWin === true) {
       console.log('Winner');
       this.end = true;
