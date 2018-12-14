@@ -10,7 +10,6 @@ class Store {
     }
 
     this.winner = false;
-
     this.message = '';
     this.marker = 'x';
   }
@@ -32,21 +31,11 @@ class Store {
       console.log(`we have a winner. congrats ${this.marker}`);
       return;
     }
+
     this.gameboard = this.gameboard.map((row, yIndex) => {
       return row.map((square, xIndex) => {
         const targetSquare = (yIndex === y && xIndex === x);
         const isEmpty = square === '';
-console.log(this.gameboard[y])
-        // const getWin = this.gameboard[y].every((winningSquare) => {
-        //   console.log('WinningSquare');
-        //   console.log(winningSquare);
-        //   const myMarker = this.gameboard[y][x];
-        //   return myMarker === winningSquare;
-        // });
-
-        // if (getWin) {
-        //   this.winner = true;
-        // }
 
         if (targetSquare) {
           if (!isEmpty && !this.winner) {
@@ -57,11 +46,11 @@ console.log(this.gameboard[y])
           // put win check here...
           if (!this.end) {
             this.marker = this.marker === 'x' ? 'o' : 'x';
-            this.isWinner(obj);
             return this.marker;
           }
           return null;
         }
+        this.isWinner(obj);
         return square;
       });
     });
@@ -72,21 +61,23 @@ console.log(this.gameboard[y])
   }
 
   isWinner ({x, y}) {
-    console.log('is Winner::', x, y)
+    // console.log('is Winner::', x, y);
     const row = this.gameboard[y].map((curr, index) => {
       if (index === x) {
         curr = this.marker;
       }
       return curr;
     });
-console.log('our row', row)
+
+    // console.log('our row', row);
     const rowWin = row.filter((curr, index) => {
       if (row[index + 1] && curr === row[index + 1]) {
         return true;
       }
       return false;
     });
-console.log(rowWin)
+
+    // console.log(rowWin);
     if (rowWin === true) {
       console.log('Winner');
       this.end = true;
