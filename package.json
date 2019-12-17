@@ -48,7 +48,7 @@
     "http-server": "^0.8.0",
     "img-loader": "^1.2.0",
     "istanbul": "^0.4.5",
-    "mocha": "^3.1.0",
+    "mocha": "^3.5.3",
     "mocha-lcov-reporter": "^1.2.0",
     "node-sass": "^3.2.0",
     "nyc": "^10.0.0-candidate.2",
