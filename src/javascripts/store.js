@@ -1,58 +1,121 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
+class Store {
+  constructor(state) {
+    const square = new Array(3).fill('');
+    const gameboard = new Array(3).fill(square);
+    this.gameboard = gameboard;
 
-import React, { Component } from 'react';
+    if (state) {
+      this.gameboard = state;
+    }
 
-class Board extends Component {
-
-  constructor(props) {
-    super(props);
-    props.store.register(this.updateState.bind(this));
+    this.winner = false;
+    this.message = '';
+    this.marker = 'x';
   }
 
-  updateState() {
-    const newState = this.props.store.getState('gameboard');
-    this.setState(newState);
+  getState(id) {
+    if (id === 'gameboard') {
+      return this.gameboard;
+    }
+    if (id === 'message') {
+      return this.message;
+    }
+    return id;
   }
 
-  render() {
-    const store = this.props.store;
-    const gameboard = this.gameboard();
+  action(obj) {
+    const { x, y } = obj;
 
-    return (
-      <div>
-        <div id='messages'>{store.getState('message')}</div>
-        <div id='gameBoard'>
-          {gameboard}
-        </div>
-        <div className='replay' onClick={this.clickHandler}></div>
-      </div>
-    );
-  }
+    if (this.winner) {
+      console.log(`we have a winner. congrats ${this.marker}`);
+      return;
+    }
 
-  gameboard() {
-    const gameboard = this.props.store.getState('gameboard');
-    let i = 0;
+    this.gameboard = this.gameboard.map((row, yIndex) => {
+      return row.map((square, xIndex) => {
+        const targetSquare = (yIndex === y && xIndex === x);
+        const isEmpty = square === '';
 
-    return gameboard.map((row, rowIndex) => {
+        if (targetSquare) {
+          if (!isEmpty && !this.winner) {
+            this.message = 'Pick an unoccupied square, hoser.';
+            return square;
+          }
 
-      return row.map((square, sqIndex) => {
-        i = i + 1;
-        const handleClick = this.clickHandler.bind(this, sqIndex, rowIndex);
-
-        return (
-          <div className='square' key={i} onClick={handleClick}>{square}</div>
-        )
+          // put win check here...
+          if (!this.end) {
+            this.marker = this.marker === 'x' ? 'o' : 'x';
+            return this.marker;
+          }
+          return null;
+        }
+        this.isWinner(obj);
+        return square;
       });
     });
+
+    if (this.callback) {
+      this.callback();
+    }
   }
 
-  clickHandler(x, y) {
-    this.props.store.action({
-      type: 'turn',
-      x,
-      y,
+  checkWin() {
+    const gameBoard = this.gameBoard;
+    let winner = false;
+    const boardWidth = this.getDim();
+
+    // Check rows.
+    for (let rowInd = 0; rowInd < boardWidth; rowInd++) {
+      let row = this.board[rowInd];
+      if (gameBoard.allEqual(row) && row[0] > 0) {
+        winner = row[0];
+        return winner;
+      }
+    }
+
+    // Check columns.
+    for (let rowInd = 0; rowInd < boardWidth; rowInd++) {
+      let col = [];
+      for (let colInd = 0; colInd < boardWidth; colInd++) {
+        col.push(this.getCell(colInd, rowInd));
+      }
+      if (gameBoard.allEqual(col) && col[0] > 0) {
+        winner = col[0];
+        return winner;
+      }
+    }
+
+    // Check diagonals.
+    let diags = { left: [], right: [] };
+    for (let i = 0; i < boardWidth; i++) {
+      diags.left.push(this.getCell(i, i));
+      diags.right.push(this.getCell(boardWidth - i - 1, i));
+    }
+
+    for (let key in diags) {
+      if (key) {
+        let diag = diags[key];
+        if (gameBoard.allEqual(diag) && diag[0] > 0) {
+          winner = diag[0];
+          return winner;
+        }
+      }
+    }
+
+    // Check tie.
+    let tie = !this.board.reduce((a, b) => {
+      return a.concat(b);
+    }).some((cell) => {
+      return cell === 0;
     });
+    if (tie) {
+      winner = 3;
+      return winner;
+    }
+
+    return winner;
   }
 }
 
-export default Board;
+module.exports = Store;
