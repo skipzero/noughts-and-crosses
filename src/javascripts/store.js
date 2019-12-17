@@ -1,96 +1,58 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
-class Store {
-  constructor (state) {
-    const square = new Array(3).fill('');
-    const gameboard = new Array(3).fill(square);
-    this.gameboard = gameboard;
 
-    if (state) {
-      this.gameboard = state;
-    }
+import React, { Component } from 'react';
 
-    this.winner = false;
-    this.message = '';
-    this.marker = 'x';
+class Board extends Component {
+
+  constructor(props) {
+    super(props);
+    props.store.register(this.updateState.bind(this));
   }
 
-  getState (id) {
-    if (id === 'gameboard') {
-      return this.gameboard;
-    }
-    if (id === 'message') {
-      return this.message;
-    }
-    return id;
+  updateState() {
+    const newState = this.props.store.getState('gameboard');
+    this.setState(newState);
   }
 
-  action (obj) {
-    const {x, y} = obj;
+  render() {
+    const store = this.props.store;
+    const gameboard = this.gameboard();
 
-    if (this.winner) {
-      console.log(`we have a winner. congrats ${this.marker}`);
-      return;
-    }
+    return (
+      <div>
+        <div id='messages'>{store.getState('message')}</div>
+        <div id='gameBoard'>
+          {gameboard}
+        </div>
+        <div className='replay' onClick={this.clickHandler}></div>
+      </div>
+    );
+  }
 
-    this.gameboard = this.gameboard.map((row, yIndex) => {
-      return row.map((square, xIndex) => {
-        const targetSquare = (yIndex === y && xIndex === x);
-        const isEmpty = square === '';
+  gameboard() {
+    const gameboard = this.props.store.getState('gameboard');
+    let i = 0;
 
-        if (targetSquare) {
-          if (!isEmpty && !this.winner) {
-            this.message = 'Pick an unoccupied square, hoser.';
-            return square;
-          }
+    return gameboard.map((row, rowIndex) => {
 
-          // put win check here...
-          if (!this.end) {
-            this.marker = this.marker === 'x' ? 'o' : 'x';
-            return this.marker;
-          }
-          return null;
-        }
-        this.isWinner(obj);
-        return square;
+      return row.map((square, sqIndex) => {
+        i = i + 1;
+        const handleClick = this.clickHandler.bind(this, sqIndex, rowIndex);
+
+        return (
+          <div className='square' key={i} onClick={handleClick}>{square}</div>
+        )
       });
     });
-
-    if (this.callback) {
-      this.callback();
-    }
   }
 
-  isWinner ({x, y}) {
-    // console.log('is Winner::', x, y);
-    const row = this.gameboard[y].map((curr, index) => {
-      if (index === x) {
-        curr = this.marker;
-      }
-      return curr;
+  clickHandler(x, y) {
+    this.props.store.action({
+      type: 'turn',
+      x,
+      y,
     });
-
-    // console.log('our row', row);
-    const rowWin = row.filter((curr, index) => {
-      if (row[index + 1] && curr === row[index + 1]) {
-        return true;
-      }
-      return false;
-    });
-
-    // console.log(rowWin);
-    if (rowWin === true) {
-      console.log('Winner');
-      this.end = true;
-    }
-  }
-
-  register (callback) {
-    if (!callback) {
-      throw new Error('onChange needs a callback');
-    }
-
-    this.callback = callback;
   }
 }
 
-module.exports = Store;
+export default Board;
