@@ -1,10 +1,10 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
 'use strict';
 class Store {
-  constructor (state) {
-    this.gameboard = [['','',''],
-                     ['','',''],
-                     ['','','']];
+  constructor(state) {
+    this.gameboard = [['', '', ''],
+    ['', '', ''],
+    ['', '', '']];
 
     if (state) {
       this.gameboard = state;
@@ -17,7 +17,7 @@ class Store {
     };
   }
 
-  getState (id) {
+  getState(id) {
     if (id === 'gameboard') {
       return this.gameboard;
     }
@@ -29,8 +29,8 @@ class Store {
     return id;
   }
 
-  action (obj) {
-    const {x, y} = obj;
+  action(obj) {
+    const { x, y } = obj;
     const gameEnded = this.state.gameOver;
 
     if (gameEnded) { // return out if we've got a winner
@@ -67,14 +67,12 @@ class Store {
     }
   }
 
-  isWinner (newBoard) {
+  isWinner(newBoard) {
 
     let boardCheck = newBoard.some((row) => {
       return this.rowCheck(row); // check our rows first as they're the easiest
     });
 
-    console.log('Board checker');
-    console.log(boardCheck);
     if (boardCheck) {
       return boardCheck;
     }
@@ -82,33 +80,26 @@ class Store {
 
     boardCheck = this.rowCheck(diagonalArray);
     if (!boardCheck) {
-      // debugger;
       newBoard = this.rotateBoard(newBoard); //Rotate board turning columns to rows
 
       boardCheck = newBoard.some((row) => { //Check the row (columns)
         return this.rowCheck(row);
       });
 
-      console.log('Rotated');
-      console.log(newBoard);
       return boardCheck;
     }
     if (!boardCheck) {
-      // debugger;
       newBoard = this.rotateBoard(newBoard); //Rotate board turning columns to rows
 
       const reverseDiagonalArray = this.crossCheck(newBoard);
       boardCheck = this.rowCheck(reverseDiagonalArray);
-      console.log('Rotated Diagonal...');
-      console.log(newBoard);
       return boardCheck;
     }
-    console.log(boardCheck);
 
     return boardCheck;
   }
 
-  rowCheck (row) {
+  rowCheck(row) {
     const matchingRow = row.every((square) => {
 
       return square === this.state.marker;
@@ -117,16 +108,14 @@ class Store {
     return matchingRow;
   }
 
-  crossCheck (crossBoard) {
+  crossCheck(crossBoard) {
     const diagonal = crossBoard.map((crossRow, index) => {
       return crossRow[index];
     });
-    console.log('diagonal checker');
-    console.log(diagonal);
     return diagonal;
   }
 
-  rotateBoard (board) {
+  rotateBoard(board) {
 
     const rotatedBoard = board[0].map((item, col) => {
       return board.map((row) => {
@@ -137,7 +126,7 @@ class Store {
     return rotatedBoard;
   }
 
-  register (callback) {
+  register(callback) {
     if (!callback) {
       throw new Error('onChange needs a callback');
     }
@@ -146,4 +135,4 @@ class Store {
   }
 }
 
-module.exports = Store;
+export default Store;
