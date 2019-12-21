@@ -7,10 +7,10 @@ html {
 }
 
 #game {
-  text-align: center;
-  width: 550px;
   margin: 10px auto 25px;
   padding: 5px;
+  text-align: center;
+  width: 550px;
 
   .square {
     border: 1px solid #0f0;
@@ -25,11 +25,27 @@ html {
     border: 1px solid #f00;
     display: flex;
     flex-flow: row wrap;
+    height: 500px;
     justify-content: space-around;
     margin: 0 auto 0;
     padding: 5px;
     width: 500px;
-    height: 500px;
+
+    .bttm {
+      border-bottom: none;
+    }
+
+    .top {
+      border-top: none;
+    }
+
+    .lft {
+      border-left: none;
+    }
+
+    .rght {
+      border-right: none;
+    }
 
     .square {
       border: 1px solid #0f0;
@@ -44,7 +60,7 @@ html {
   .replay {
     width: 50px;
     height: 50px;
-    background: #ccc;
+    background: #0df  ;
   }
 
   #messages {

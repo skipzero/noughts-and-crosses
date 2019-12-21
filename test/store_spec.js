@@ -1,6 +1,6 @@
 'use strict';
 const expect = require('expect.js');
-const Store = require('../src/javascripts/store');
+const Store = require('../src/javascripts/store').default;
 
 describe('Store', () => {
   it('is a function', () => {
@@ -39,7 +39,7 @@ describe('Store', () => {
     });
 
     describe('.action', () => {
-      it('center square is x', () => {
+      it('center square is o', () => {
 
         instance.action({
           type: 'turn',
@@ -54,12 +54,13 @@ describe('Store', () => {
         ]);
       });
 
-      it('first square last row is o', () => {
+      it('first square last row is x', () => {
         instance.action({
           type: 'turn',
           x: 0,
           y: 2,
         });
+
 
         const actual = instance.getState('gameboard');
         expect(actual).to.eql([
@@ -91,7 +92,7 @@ describe('Store', () => {
       });
 
       // TODO: refactor to an array of object to test against. map with the array to the test function.
-      it ('can\'t place on a marked square', () => {
+      it('can\'t place on a marked square', () => {
         instance.action({
           type: 'turn',
           x: 1,
@@ -112,7 +113,7 @@ describe('Store', () => {
         ]);
       });
 
-      it ('message has text and meaning', () => {
+      it('message has text and meaning', () => {
         instance.action({
           type: 'turn',
           x: 1,
@@ -148,9 +149,9 @@ describe('Store', () => {
 
       it('returns true for winning condition', () => {
         let game = new Store([
-          ['x','x',''],
-          ['o','o',''],
-          ['','',''],
+          ['x', 'x', ''],
+          ['o', 'o', ''],
+          ['', '', ''],
         ]);
 
         game.action({
@@ -161,11 +162,11 @@ describe('Store', () => {
         expect(game.state.gameOver).to.eql(true);
       });
 
-      it ('winning message displays', () => {
+      it('winning message displays', () => {
         let game = new Store([
-          ['x','x',''],
-          ['o','o',''],
-          ['','',''],
+          ['x', 'x', ''],
+          ['o', 'o', ''],
+          ['', '', ''],
         ]);
 
         game.action({
@@ -210,7 +211,7 @@ describe('Store', () => {
 
       it('marker toggles between an x & an o', () => {
         instance = new Store([
-          ['', '' ,''],
+          ['', '', ''],
           ['', '', ''],
           ['', '', 'o'],
         ]);

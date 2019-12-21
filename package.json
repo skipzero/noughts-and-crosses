@@ -1,70 +1,47 @@
 {
-  "name": "noughts-and-crosses",
-  "version": "1.0.0",
-  "description": "exes n ohs",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/zerosquadron/noughts-and-crosses.git"
-  },
+  "name": "t3",
+  "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "test": "mocha",
-    "cover": "./node_modules/istanbul/lib/cli.js cover _mocha",
-    "start": "./node_modules/.bin/webpack-dev-server -d --progress --colors --port 3000",
-    "clean": "rm -rf node_modules dist",
-    "build": "npm run clean && npm i && webpack -p",
-    "dev": "webpack --progress --colors -d --watch",
-    "lint": ""
-  },
-  "nyc": {
-    "sourceMap": false,
-    "instrument": false
-  },
-  "author": "skip mcbride",
-  "license": "MIT",
   "dependencies": {
-    "babel-loader": "^6.2.5",
-    "babel-preset-es2015": "^6.14.0",
-    "babel-preset-react": "^6.11.1",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.0"
+  },
+  "scripts": {
+    "test": "mocha --require @babel/register",
+    "cover": "./node_modules/istanbul/lib/cli.js cover _mocha",
+    "start": "webpack-dev-server -d --progress --colors --port 3000",
+    "clean": "rm -rf node_modules dist && mkdir dist",
+    "build": "npm run clean && npm i && cp ./src/index.html ./dist && webpack --config webpack.configl.js",
+    "dev": "webpack --progress --colors -d --watch"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
-    "autoprefixer": "^6.7.7",
-    "babel": "^6.23.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^6.1.2",
-    "babel-plugin-istanbul": "^3.0.0",
-    "babel-register": "^6.18.0",
-    "coveralls": "^2.11.15",
-    "css-loader": "^0.23.0",
-    "cssnano": "^3.7.5",
-    "eslint": "^3.19.0",
-    "eslint-loader": "^1.5.0",
-    "eslint-plugin-react": "^6.3.0",
+    "@babel/core": "^7.7.7",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.7.2",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-scope": "^5.0.0",
     "expect.js": "^0.3.1",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.8.4",
-    "http-server": "^0.8.0",
-    "img-loader": "^1.2.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^3.1.0",
-    "mocha-lcov-reporter": "^1.2.0",
     "node-sass": "^4.13.0",
-    "nyc": "^10.0.0-candidate.2",
-    "postcss-loader": "^0.8.0",
-    "precss": "^1.4.0",
-    "react": "^0.14.3",
-    "react-hot-loader": "^1.2.8",
-    "resolve-url-loader": "^1.6.0",
-    "sass-loader": "^3.1.2",
-    "source-map-loader": "^0.1.5",
-    "style-loader": "^0.13.0",
-    "svgo": "^0.6.1",
-    "svgo-loader": "^1.1.0",
-    "url-loader": "^0.5.6",
-    "webpack": "^1.15.0",
-    "webpack-dev-server": "^1.16.5"
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.1.1",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
   }
 }

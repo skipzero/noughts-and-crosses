@@ -1,5 +1,5 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
-'use strict';
+
 class Store {
   constructor(state) {
     this.gameboard = [['', '', ''],
