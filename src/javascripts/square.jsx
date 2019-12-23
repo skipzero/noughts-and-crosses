@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default class Square extends React.Component {
-
   playerTurn() {
     this.props.handleClick(this.props.index, this.props.turn);
   }

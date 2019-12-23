@@ -21,11 +21,13 @@ class Board extends React.Component {
     return gameboard.map((row, rowIndex) => {
       return row.map((square, sqIndex) => {
         const handleClick = this.clickHandler.bind(this, sqIndex, rowIndex);
+        const keyIndex = rowIndex + sqIndex;
+        console.log(keyIndex)
         return (
-          <div className='square' onClick={handleClick}>
+          <div className='square' onClick={handleClick} key={keyIndex}>
             {square}
-          </div>
-        );
+          </div >
+        )
       });
     });
   }
@@ -38,9 +40,13 @@ class Board extends React.Component {
         <div id='gameBoard'>
           {gameboard}
         </div>
-        <div className='replay' onClick={this.clickHandler}></div>
+        <div className='replay' onClick={this.restart}></div>
       </div>
     );
+  }
+
+  restart() {
+
   }
 
   clickHandler(x, y) {
