@@ -1,6 +1,6 @@
 src/
 test/
---extension *_spec.js
+--extension *.js
 --recursive
 --check-leaks
 --require @babel/register
