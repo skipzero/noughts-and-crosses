@@ -1,9 +1,7 @@
-'use strict';
-
 const Store = require('./store');
 
 class Ai {
-  constructor () {
+  constructor() {
     const trials = 1000;
     const store = new Store();
 

@@ -42,7 +42,7 @@ class Store {
 
     const isEmpty = square === '';
 
-    if (!isEmpty) {
+    if (!isEmpty) { // only allow one move per square;
       this.state.message = 'Pick an unoccupied square, hoser.';
       return;
     }
@@ -90,7 +90,6 @@ class Store {
     }
     if (!boardCheck) {
       newBoard = this.rotateBoard(newBoard); //Rotate board turning columns to rows
-
       const reverseDiagonalArray = this.crossCheck(newBoard);
       boardCheck = this.rowCheck(reverseDiagonalArray);
       return boardCheck;

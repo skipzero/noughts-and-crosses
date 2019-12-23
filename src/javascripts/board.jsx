@@ -19,12 +19,25 @@ class Board extends React.Component {
     const gameboard = this.props.store.getState('gameboard');
 
     return gameboard.map((row, rowIndex) => {
+      let classes = 'square ';
+      if (rowIndex === 0) {
+        classes += 'top ';
+      }
+      if (rowIndex === 2) {
+        classes += 'bottom ';
+      }
       return row.map((square, sqIndex) => {
+        if (sqIndex === 0) {
+          classes += 'left ';
+        }
+        if (sqIndex === 2) {
+          classes += 'right ';
+        }
         const handleClick = this.clickHandler.bind(this, sqIndex, rowIndex);
         const keyIndex = rowIndex + sqIndex;
         console.log(keyIndex)
         return (
-          <div className='square' onClick={handleClick} key={keyIndex}>
+          <div className={classes} onClick={handleClick} key={keyIndex}>
             {square}
           </div >
         )
@@ -40,7 +53,7 @@ class Board extends React.Component {
         <div id='gameBoard'>
           {gameboard}
         </div>
-        <div className='replay' onClick={this.restart}></div>
+        <div className='replay' onClick={this.restart}> REPLAY </div>
       </div>
     );
   }
