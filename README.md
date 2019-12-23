@@ -19,19 +19,19 @@ Enjoy! :)
 
 clone repo locally
 
-    npm install
-
-**Watch files:**
-
-to watch files run
-
-    npm run dev
+    yarn
 
 **To start server:**
 
 to run the game locally
 
-    npm start
+    yarn start (or npm start)
+
+**To run tests:**
+
+to run the test suite
+
+    yarn test (or npm test)
 
 
 [dave-image]: https://david-dm.org/zerosquadron/noughts-and-crosses.svg

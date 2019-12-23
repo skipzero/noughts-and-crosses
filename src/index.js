@@ -1,11 +1,11 @@
 import React from 'react';
-import { render } from 'react-dom';
-
-import './styles/index.css';
-
+import ReactDOM from 'react-dom';
 import Game from './javascripts/board.jsx';
 import Store from './javascripts/store.js';
+
+import './stylesheets/main.scss';
+
 const store = new Store();
 window.storeG = store;
 
-render(<Game store={store} />, document.getElementById('game'));
+ReactDOM.render(<Game store={store} />, document.getElementById('game'));

@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+/* eslint no-debugger: 0 */
 
-class Board extends Component {
+import React from 'react';
+import PropTypes from 'prop-types';
 
+class Board extends React.Component {
   constructor(props) {
     super(props);
+
     props.store.register(this.updateState.bind(this));
   }
 
@@ -12,39 +15,54 @@ class Board extends Component {
     this.setState(newState);
   }
 
-  render() {
-    const store = this.props.store;
-    const gameboard = this.gameboard();
-
-    return (
-      <div>
-        <div id='messages'>{store.getState('message')}</div>
-          <div id='gameBoard'>
-            {gameboard}
-          </div>
-        <div className='replay' onClick={this.clickHandler}></div>
-      </div>
-    );
-  }
-
-  gameboard() {
+  gameBoard() {
     const gameboard = this.props.store.getState('gameboard');
-    let i = 0;
 
     return gameboard.map((row, rowIndex) => {
-
+      let classes = 'square ';
+      if (rowIndex === 0) {
+        classes += 'top ';
+      }
+      if (rowIndex === 2) {
+        classes += 'bottom ';
+      }
       return row.map((square, sqIndex) => {
-        i = i + 1;
+        if (sqIndex === 0) {
+          classes += 'left ';
+        }
+        if (sqIndex === 2) {
+          classes += 'right ';
+        }
         const handleClick = this.clickHandler.bind(this, sqIndex, rowIndex);
-
+        const keyIndex = rowIndex + sqIndex;
+        console.log(keyIndex)
         return (
-          <div className='square' key={i} onClick={handleClick}>{square}</div>
+          <div className={classes} onClick={handleClick} key={keyIndex}>
+            {square}
+          </div >
         )
       });
     });
   }
 
-  clickHandler (x, y) {
+  render() {
+    const gameboard = this.gameBoard();
+    return (
+      <div>
+        <div id='messages'>{this.props.store.getState('message')}</div>
+        <div id='gameBoard'>
+          {gameboard}
+        </div>
+        <div className='replay' onClick={this.restart}> REPLAY </div>
+      </div>
+    );
+  }
+
+  restart() {
+
+  }
+
+  clickHandler(x, y) {
     this.props.store.action({
       type: 'turn',
       x,
@@ -52,5 +70,12 @@ class Board extends Component {
     });
   }
 }
+
+Board.propTypes = {
+  store: PropTypes.object,
+  getState: PropTypes.func,
+  setSquare: PropTypes.func,
+  register: PropTypes.func,
+};
 
 export default Board;

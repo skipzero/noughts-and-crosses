@@ -1,121 +1,137 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
+
 class Store {
   constructor(state) {
-    const square = new Array(3).fill('');
-    const gameboard = new Array(3).fill(square);
-    this.gameboard = gameboard;
+    this.gameboard = [['', '', ''],
+    ['', '', ''],
+    ['', '', '']];
 
     if (state) {
       this.gameboard = state;
     }
 
-    this.winner = false;
-    this.message = '';
-    this.marker = 'x';
+    this.state = {
+      gameOver: false,
+      message: '',
+      marker: 'x',
+    };
   }
 
   getState(id) {
     if (id === 'gameboard') {
       return this.gameboard;
     }
+
     if (id === 'message') {
-      return this.message;
+      return this.state.message;
     }
+
     return id;
   }
 
   action(obj) {
     const { x, y } = obj;
+    const gameEnded = this.state.gameOver;
 
-    if (this.winner) {
-      console.log(`we have a winner. congrats ${this.marker}`);
+    if (gameEnded) { // return out if we've got a winner
       return;
     }
 
-    this.gameboard = this.gameboard.map((row, yIndex) => {
-      return row.map((square, xIndex) => {
-        const targetSquare = (yIndex === y && xIndex === x);
-        const isEmpty = square === '';
+    let marker = this.state.marker;
+    let square = this.gameboard[y][x];
 
-        if (targetSquare) {
-          if (!isEmpty && !this.winner) {
-            this.message = 'Pick an unoccupied square, hoser.';
-            return square;
-          }
+    const isEmpty = square === '';
 
-          // put win check here...
-          if (!this.end) {
-            this.marker = this.marker === 'x' ? 'o' : 'x';
-            return this.marker;
-          }
-          return null;
-        }
-        this.isWinner(obj);
-        return square;
-      });
-    });
+    if (!isEmpty) { // only allow one move per square;
+      this.state.message = 'Pick an unoccupied square, hoser.';
+      return;
+    }
+
+    square = this.state.marker;
+    this.gameboard[y][x] = square;
+
+    const gameOver = this.isWinner(this.gameboard);
+
+    if (gameOver) {
+      this.state.message = `Good Job ${(this.state.marker).toUpperCase()}'s. U win.`;
+      this.state.gameOver = gameOver;
+      // return;
+    }
+
+    this.state.gameOver = gameOver;
+
+    this.state.marker = marker === 'x' ? 'o' : 'x';
 
     if (this.callback) {
       this.callback();
     }
   }
 
-  checkWin() {
-    const gameBoard = this.gameBoard;
-    let winner = false;
-    const boardWidth = this.getDim();
+  isWinner(newBoard) {
 
-    // Check rows.
-    for (let rowInd = 0; rowInd < boardWidth; rowInd++) {
-      let row = this.board[rowInd];
-      if (gameBoard.allEqual(row) && row[0] > 0) {
-        winner = row[0];
-        return winner;
-      }
-    }
-
-    // Check columns.
-    for (let rowInd = 0; rowInd < boardWidth; rowInd++) {
-      let col = [];
-      for (let colInd = 0; colInd < boardWidth; colInd++) {
-        col.push(this.getCell(colInd, rowInd));
-      }
-      if (gameBoard.allEqual(col) && col[0] > 0) {
-        winner = col[0];
-        return winner;
-      }
-    }
-
-    // Check diagonals.
-    let diags = { left: [], right: [] };
-    for (let i = 0; i < boardWidth; i++) {
-      diags.left.push(this.getCell(i, i));
-      diags.right.push(this.getCell(boardWidth - i - 1, i));
-    }
-
-    for (let key in diags) {
-      if (key) {
-        let diag = diags[key];
-        if (gameBoard.allEqual(diag) && diag[0] > 0) {
-          winner = diag[0];
-          return winner;
-        }
-      }
-    }
-
-    // Check tie.
-    let tie = !this.board.reduce((a, b) => {
-      return a.concat(b);
-    }).some((cell) => {
-      return cell === 0;
+    let boardCheck = newBoard.some((row) => {
+      return this.rowCheck(row); // check our rows first as they're the easiest
     });
-    if (tie) {
-      winner = 3;
-      return winner;
+
+    if (boardCheck) {
+      return boardCheck;
+    }
+    const diagonalArray = this.crossCheck(newBoard);
+
+    boardCheck = this.rowCheck(diagonalArray);
+    if (!boardCheck) {
+      newBoard = this.rotateBoard(newBoard); //Rotate board turning columns to rows
+
+      boardCheck = newBoard.some((row) => { //Check the row (columns)
+        return this.rowCheck(row);
+      });
+
+      return boardCheck;
+    }
+    if (!boardCheck) {
+      newBoard = this.rotateBoard(newBoard); //Rotate board turning columns to rows
+      const reverseDiagonalArray = this.crossCheck(newBoard);
+      boardCheck = this.rowCheck(reverseDiagonalArray);
+      return boardCheck;
     }
 
-    return winner;
+    return boardCheck;
+  }
+
+  rowCheck(row) {
+    const matchingRow = row.every((square) => {
+
+      return square === this.state.marker;
+    });
+
+    return matchingRow;
+  }
+
+  crossCheck(crossBoard) {
+    const diagonal = crossBoard.map((crossRow, index) => {
+      return crossRow[index];
+    });
+    return diagonal;
+  }
+
+  rotateBoard(board) {
+
+    const rotatedBoard = board[0].map((item, col) => {
+      return board.map((row) => {
+        return row[col];
+      }).reverse();
+    });
+
+    return rotatedBoard;
+  }
+
+  register(callback) {
+    if (!callback) {
+      throw new Error('onChange needs a callback');
+    }
+
+    this.callback = callback;
   }
 }
 
-module.exports = Store;
+export default Store;
