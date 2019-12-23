@@ -13,6 +13,7 @@ html {
 
 #game {
   background-color: #ddd;
+  height: 100%;
   margin: 0 auto 2.5rem;
   padding: .5rem;
   text-align: center;
@@ -21,12 +22,12 @@ html {
   .square {
     background-color: #76b8f5;
     box-shadow: .8rem .6rem 2rem #000 inset;
-    font-size: 15rem;
+    font-size: 18rem;
     font-weight: bold;
     letter-spacing: 3rem;
     line-height: 14rem;
     text-align: left;
-    text-shadow: 6px 6px 4px #1d81de;
+    text-shadow: .6rem .6rem .4rem #1d81de;
     width: 15rem;
     height: 15rem;
   }
@@ -40,30 +41,15 @@ html {
     margin: 0 auto 0;
     padding: .5rem;
     width: 50rem;
-
-    .bottom {
-      border-bottom: none;
-    }
-
-    .top {
-      border-top: none;
-    }
-
-    .left {
-      border-left: none;
-    }
-
-    .right {
-      border-right: none;
-    }
   }
 
   .replay {
     background-color: #0dd;
-    font-size: 5rem;
+    font-size: 4.5rem;
     height: 5rem;
-    line-height: 10rem;
+    line-height: 7rem;
     margin: 1rem auto;
+    width: 20rem;
   }
 
   #messages {
