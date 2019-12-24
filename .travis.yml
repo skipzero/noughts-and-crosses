@@ -5,5 +5,5 @@ before_script:
   - npm i -g istanbul
 script: npm run build
 after_success:
-  - npm run coveralls
+  - npm run cover
 sudo: false
