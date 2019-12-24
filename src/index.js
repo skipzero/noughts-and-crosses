@@ -5,9 +5,6 @@ import Store from './javascripts/store.js';
 
 import './stylesheets/main.scss';
 
-import LogRocket from 'logrocket';
-LogRocket.init('f060zk/noughts-and-crosses');
-
 const store = new Store();
 window.storeG = store;
 
