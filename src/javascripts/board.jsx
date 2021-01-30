@@ -40,7 +40,7 @@ class Board extends React.Component {
           <div className={classes} onClick={handleClick} key={keyIndex}>
             {square}
           </div >
-        )
+        );
       });
     });
   }
@@ -59,10 +59,11 @@ class Board extends React.Component {
   }
 
   restart() {
-
+    return;
   }
 
   clickHandler(x, y) {
+    debugger;
     this.props.store.action({
       type: 'turn',
       x,
