@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, } from 'react';
+import Game from './javascripts/Game';
 
 function App() {
   return (
@@ -9,22 +10,6 @@ function App() {
       <Game />
     </div>
   );
-}
-
-function genGrid(rows, col, ) {
-  return Array(rows).fill(null).map(() => {
-    return Array(col).fill(null);
-  });
-}
-
-const newGameBoard = () => {
-  return genGrid(3, 3);
-};
-
-function Game() {
-  const board = newGameBoard();
-  console.log('+++++', board);
-  return board;
 }
 
 export default App;

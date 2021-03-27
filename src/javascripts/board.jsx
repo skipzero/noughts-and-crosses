@@ -1,12 +1,15 @@
 /* eslint no-debugger: 0 */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 
-const Square = (props) => {
-  <button onClick={props.onClick}> {props.value} </button>
-}
+function Board() {
 
-const Board = () => {
+  return (
+    <div>
+      <div className='status'> Status </div>
+    </div>
+  );
 
 }
 export default Board;
