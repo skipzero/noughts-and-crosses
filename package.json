@@ -1,46 +1,30 @@
 {
-  "name": "noughts-and-crosses-ii",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "logrocket": "^1.0.5",
-    "node-sass": "^7.0.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "5.0.1"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "test-dev": "mocha -r expect.js --recursive ./test/*.js --opts ./test/mocha.opts",
-    "cover": "./node_modules/istanbul/lib/cli.js cover _mocha --recursive ./test/*.js --opts ./test/mocha.opts"
+    "start": "snowpack dev",
+    "build": "snowpack build",
+    "test": "web-test-runner \"src/**/*.test.tsx\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@babel/register": "^7.7.7",
-    "coveralls": "^3.0.9",
-    "expect.js": "^0.3.1",
-    "istanbul": "^0.4.5",
-    "mocha": "^10.2.0",
-    "nyc": "^15.0.0"
+    "@snowpack/plugin-dotenv": "^2.1.0",
+    "@snowpack/plugin-react-refresh": "^2.5.0",
+    "@snowpack/plugin-typescript": "^1.2.1",
+    "@snowpack/web-test-runner-plugin": "^0.2.2",
+    "@testing-library/react": "^11.2.6",
+    "@types/chai": "^4.2.17",
+    "@types/mocha": "^8.2.2",
+    "@types/react": "^17.0.4",
+    "@types/react-dom": "^17.0.3",
+    "@types/snowpack-env": "^2.3.3",
+    "@web/test-runner": "^0.13.3",
+    "chai": "^4.3.4",
+    "prettier": "^2.2.1",
+    "snowpack": "^3.3.7",
+    "typescript": "^4.2.4"
   }
 }

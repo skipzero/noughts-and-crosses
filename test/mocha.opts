@@ -1,7 +1,0 @@
-src/
-test/
---extension *.js
---recursive ./test/
---check-leaks
---require @babel/register
---require expect.js

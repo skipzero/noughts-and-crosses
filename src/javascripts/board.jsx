@@ -4,6 +4,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+
+    props.store.register(this.updateState.bind(this));
+  }
 
   updateState() {
     const newState = this.props.store.getState('gameboard');
